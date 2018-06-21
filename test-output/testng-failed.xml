@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="3" name="Failed suite [Loginext Test Suite]" parallel="tests">
+  <parameter name="Datasheet" value="DataMap_Wallet"/>
+  <test name="Loginext Test - com.loginext.Scenarios.Wallet.verifyWalletTransaction.29980(failed)" parallel="tests">
+    <parameter name="Datasheet" value="DataMap_Wallet"/>
+    <classes>
+      <class name="com.loginext.Scenarios.Wallet">
+        <methods>
+          <include name="verifyWalletTransaction" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- com.loginext.Scenarios.Wallet -->
+    </classes>
+  </test> <!-- Loginext Test - com.loginext.Scenarios.Wallet.verifyWalletTransaction.29980(failed) -->
+</suite> <!-- Failed suite [Loginext Test Suite] -->

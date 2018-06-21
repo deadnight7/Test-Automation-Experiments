@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+  <title>TestNG reports</title>
+
+    <link type="text/css" href="testng-reports.css" rel="stylesheet" />  
+    <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="testng-reports.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type='text/javascript'>
+      google.load('visualization', '1', {packages:['table']});
+      google.setOnLoadCallback(drawTable);
+      var suiteTableInitFunctions = new Array();
+      var suiteTableData = new Array();
+    </script>
+    <!--
+      <script type="text/javascript" src="jquery-ui/js/jquery-ui-1.8.16.custom.min.js"></script>
+     -->
+  </head>
+
+  <body>
+    <div class="top-banner-root">
+      <span class="top-banner-title-font">Test results</span>
+      <br/>
+      <span class="top-banner-font-1">1 suite</span>
+    </div> <!-- top-banner-root -->
+    <div class="navigator-root">
+      <div class="navigator-suite-header">
+        <span>All suites</span>
+        <a href="#" class="collapse-all-link" title="Collapse/expand all the suites">
+          <img class="collapse-all-icon" src="collapseall.gif">
+          </img> <!-- collapse-all-icon -->
+        </a> <!-- collapse-all-link -->
+      </div> <!-- navigator-suite-header -->
+      <div class="suite">
+        <div class="rounded-window">
+          <div class="suite-header light-rounded-window-top">
+            <a href="#" class="navigator-link" panel-name="suite-Loginext_Test_Suite">
+              <span class="suite-name border-passed">Loginext Test Suite</span>
+            </a> <!-- navigator-link -->
+          </div> <!-- suite-header light-rounded-window-top -->
+          <div class="navigator-suite-content">
+            <div class="suite-section-title">
+              <span>Info</span>
+            </div> <!-- suite-section-title -->
+            <div class="suite-section-content">
+              <ul>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="test-xml-Loginext_Test_Suite">
+                    <span>[unset file name]</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="testlist-Loginext_Test_Suite">
+                    <span class="test-stats">1 test</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="group-Loginext_Test_Suite">
+                    <span>0 groups</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="times-Loginext_Test_Suite">
+                    <span>Times</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="reporter-Loginext_Test_Suite">
+                    <span>Reporter output</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="ignored-methods-Loginext_Test_Suite">
+                    <span>Ignored methods</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="chronological-Loginext_Test_Suite">
+                    <span>Chronological view</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+              </ul>
+            </div> <!-- suite-section-content -->
+            <div class="result-section">
+              <div class="suite-section-title">
+                <span>Results</span>
+              </div> <!-- suite-section-title -->
+              <div class="suite-section-content">
+                <ul>
+                  <li>
+                    <span class="method-stats">1 method,   1 passed</span>
+                  </li>
+                  <li>
+                    <span class="method-list-title passed">Passed methods</span>
+                    <span class="show-or-hide-methods passed">
+                      <a href="#" panel-name="suite-Loginext_Test_Suite" class="hide-methods passed suite-Loginext_Test_Suite"> (hide)</a> <!-- hide-methods passed suite-Loginext_Test_Suite -->
+                      <a href="#" panel-name="suite-Loginext_Test_Suite" class="show-methods passed suite-Loginext_Test_Suite"> (show)</a> <!-- show-methods passed suite-Loginext_Test_Suite -->
+                    </span>
+                    <div class="method-list-content passed suite-Loginext_Test_Suite">
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Loginext_Test_Suite" title="com.loginext.Scenarios.MobileTest" hash-for-method="wikipediaTest({ClientName=, URL=, UserName=, Password=, Orders_Page_Start=, distributionCenter=LMDMumbai, hubName=...)">wikipediaTest({ClientName=, URL=, UserName=, Password=, Orders_Page_Start=, distributionCenter=LMDMumbai, hubName=...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content passed suite-Loginext_Test_Suite -->
+                  </li>
+                </ul>
+              </div> <!-- suite-section-content -->
+            </div> <!-- result-section -->
+          </div> <!-- navigator-suite-content -->
+        </div> <!-- rounded-window -->
+      </div> <!-- suite -->
+    </div> <!-- navigator-root -->
+    <div class="wrapper">
+      <div class="main-panel-root">
+        <div panel-name="suite-Loginext_Test_Suite" class="panel Loginext_Test_Suite">
+          <div class="suite-Loginext_Test_Suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">com.loginext.Scenarios.MobileTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="wikipediaTest({ClientName=, URL=, UserName=, Password=, Orders_Page_Start=, distributionCenter=LMDMumbai, hubName=...)">
+                  </a> <!-- wikipediaTest({ClientName=, URL=, UserName=, Password=, Orders_Page_Start=, distributionCenter=LMDMumbai, hubName=...) -->
+                  <span class="method-name">wikipediaTest</span>
+                  <span class="parameters">({ClientName=, URL=, UserName=, Password=, Orders_Page_Start=, distributionCenter=LMDMumbai, hubName=Last Mile Demo, orderNo=Ord_AUTOGEN[7]_test, awbNumber=Awb_AUTOGEN[7], shipmentOrderDt=DATE[NOW - (15MIN)], deliveryType=DONOTUSETHISPARAM, packageWeight=INTEGER[10], packageVolume=DECIMAL[10.1], paymentType=Cash On Delivery, packageValue=INTEGER[200], ServiceTime=INTEGER[15], StartTimeWindow=DATE[NOW + (50 MINUTES)], EndTimeWindow=DATE[NOW + (80 MINUTES)], isPartialDeliveryAllowedFl=DONOTUSETHISPARAM, returnAllowedFl=DONOTUSETHISPARAM, cancellationAllowedFl=DONOTUSETHISPARAM, AccountCode=Cust_AUTOGEN[4], AccountName=User_AUTOGEN[4], Email=User_AUTOGEN[4]@test.com, PhoneNumber=9AUTOGEN[9], Country=INDIA, Apartment=A901 Supreme Business Park, StreetName=South Avenue, Landmark=Near Hiranandani Gardens, Locality=Powai, City=Mumbai, State=Maharashtra, PinCode=INTEGER[400076], deliverNotes=DONOTUSETHISPARAM, Orders_Page_End=, Vehicle_Page_Start=, clientBranchId=LMDMumbai, vehicleType=4 Wheeler, vehicleNumber=MHAUTOGEN[8], vehicleMake=Van, vehicleModel=Tempo, unladdenWeight=INTEGER[300], capacityInUnits=INTEGER[10], capacityInWeight=DECIMAL[90.1], capacityInVolume=DECIMAL[92.1], chasisNumber=C_AUTOGEN[8], engineNumber=E_AUTOGEN[8], markerName=M_AUTOGEN[8], vehiclePermit=OPTION,OPTION, registrationCopy=testRegistrationCopy.pdf, registrationNumber=R_AUTOGEN[8], pucCopy=testPUCValidityCopy.pdf, pucValidity=DONOTUSETHISPARAM, insuranceCopy=testInsauranceCopy.pdf, insuranceValidity=DATE[NOW + (10 YEARS)], ownership=Company, ownerName=Ram, transporter=Nikhil, financer=John, accidentHistory=None, Vehicle_Page_End=, DeliveryBoy_Page_Start=, db.employeeId=E_AUTOGEN[8], db.distributionCenter=LMDMumbai, db.userGroupId=MobileUser_LMDemo, db.deliveryMediumMasterName=User_AUTOGEN[7], db.phoneNumber=9AUTOGEN[9], db.imei=AUTOGEN[15], db.emailId=User_AUTOGEN[4]@test.com, db.userName=User_AUTOGEN[9], db.password=Test!1234, db.confirmPassword=Test!1234, db.capacityInUnits=INTEGER[5000], db.capacityInVolume=DECIMAL[10000], db.capacityInWeight=DECIMAL[11000], db.dob=DATE[NOW - (20 YEARS)], db.deliveryMediumMapList=ENGLISH,HINDI, db.gender=Male, db.deliveryType=DONOTUSETHISPARAM, db.isOwnVehicleFl=Company, db.vehicleNumber=DONOTUSETHISPARAM, db.dmPreference=INTEGER[401107], db.shiftFrom=01:00, db.shiftTo=23:30, db.weeklyOffList=Sunday, db.maxDistance=INTEGER[200], db.licenseValidity=DATE[NOW + (10 YEARS)], db.variableCost=INTEGER[150], db.fixedCost=INTEGER[200], DeliveryBoy_Page_End=, DeliveryBoyUpdate_Page_Start=, dbu.employeeId=E_AUTOGEN[8], dbu.distributionCenter=LMDMumbai, dbu.userGroupId=MobileUser_LMDemo, dbu.deliveryMediumMasterName=User_AUTOGEN[4], dbu.phoneNumber=9AUTOGEN[9], dbu.imei=AUTOGEN[15], dbu.emailId=User_AUTOGEN[4]@test.com, dbu.capacityInUnits=INTEGER[10], dbu.capacityInVolume=DECIMAL[90.1], dbu.capacityInWeight=DECIMAL[90.1], dbu.dob=DATE[NOW - (20 YEARS)], dbu.deliveryMediumMapList=MARATHI, dbu.gender=Male, dbu.deliveryType=DONOTUSETHISPARAM, dbu.isOwnVehicleFl=Company, dbu.vehicleNumber=DONOTUSETHISPARAM, dbu.dmPreference=INTEGER[400010], dbu.shiftFrom=01:00, dbu.shiftTo=23:30, dbu.weeklyOffList=OPTION, dbu.maxDistance=INTEGER[200], dbu.licenseValidity=DATE[NOW + (10 YEARS)], dbu.variableCost=INTEGER[150], dbu.fixedCost=INTEGER[200], DeliveryBoyUpdate_Page_End=, DeliveryBoyBulkUpdate_Page_Start=, dbbu.distributionCenter=Kolkata, dbbu.capacityInUnits=INTEGER[11], dbbu.capacityInWeight=DECIMAL[92.1], dbbu.capacityInVolume=DECIMAL[93.1], dbbu.deliveryType=Delivery Boy, dbbu.weeklyOffList=Sunday, dbbu.attendance=DONOTUSETHISPARAM, dbbu.variableCost=INTEGER[11], dbbu.fixedCost=INTEGER[11], dbbu.shiftFrom=00:30, dbbu.shiftTo=22:30, dbbu.isActiveFl=DONOTUSETHISPARAM, DeliveryBoyBulkUpdate_Page_End=, GeoCodingString=Kensington Rear Exit Road, Hiranandani Gardens, Powai, Mumbai, Maharashtra 400076, India, RoutePlanning_Page_Start=, rp.routeName=AUTOTRP_AUTOGEN[5], rp.startDate=DATE[NOW - (5HOURS)], rp.endDate=DATE[NOW + (5HOURS)], RoutePlanning_Page_End=, Wallets_Withdrawal_Page_Start=, withdrawAmount=INTEGER[10000], userComments=Test Withdraw, Wallets_Withdrawal_Page_End=, DeliveryBoyUpload_Page_Start=, du.EMPLOYEEID=E_AUTOGEN[8], du.BRANCHNAME=LMDMumbai, du.USERGROUP=MobileUser_LMDemo, du.FULLNAME=User_AUTOGEN[5], du.MOBILENUMBER=9AUTOGEN[9], du.IMEINUMBER=AUTOGEN[15], du.EMAILID=User_AUTOGEN[4]@test.com, du.USERNAME=User_AUTOGEN[9], du.PASSWORD=Test!123, du.CAPACITYINUNITS=INTEGER[10], du.CAPACITYINWEIGHT=DECIMAL[90.1], du.CAPACITYINVOLUME=DECIMAL[90.1], du.DOB=1990-12-09, du.LANGUAGE=ENGLISH, du.GENDER=Male, du.DELIVERYMEDIUMTYPE=DONOTUSETHISPARAM, du.ISOWNERFL=DONOTUSETHISPARAM, du.VEHICLENUMBER=DONOTUSETHISPARAM, du.PINCODES=INTEGER[400010], du.WEEKLYOFF=Wednesday, du.DISTANCEALLOWED=INTEGER[200], du.LICENSEVALIDITY=2020-09-26, du.FIXEDCOST=INTEGER[150], du.VARIABLECOST=INTEGER[200], du.SHIFTFROM=11:00, du.SHIFTTO=23:30, DeliveryBoyUpload_Page_End=, OrdersUpload_Page_Start=, u.ORDERTYPE=DELIVER, u.RETURNORDER=No, u.BRANCH=LMDMumbai, u.RETURNBRANCH=LMDMumbai, u.ORDERNO=Ord_AUTOGEN[7]_File, u.AWBNO=Ord_AUTOGEN[7]_File, u.ORDERDATE=DATE[NOW - (15MIN)], u.DELIVERYTYPE=Delivery Boy, u.NOOFITEMS=INTEGER[6], u.WEIGHT=DECIMAL[4], u.VOLUME=DECIMAL[500], u.PAYMENTMODE=COD, u.VALUE=INTEGER[2000], u.SERVICETIME=INTEGER[10], u.DELIVERYLOCATIONTYPE=CUSTOMER, u.STARTTIME=DATE[NOW + (50 MINUTES)], u.ENDTIME=DATE[NOW + (80 MINUTES)], u.PARTIALDELIVERYALLOWED=Yes, u.RETURNALLOWED=Yes, u.CANCELLATIONALLOWED=Yes, u.CUSTOMERACCOUNTCODE=Cust_AUTOGEN[4], u.CUSTOMERACCOUNTNAME=User_AUTOGEN[4], u.CUSTOMEREMAIL=User_AUTOGEN[4]@test.com, u.CUSTOMERCONTACTNO=INTEGER[9004300456], u.CUSTOMERAPARTMENT=A901 Supreme Business Park, u.CUSTOMERSTREET=South Avenue, u.CUSTOMERLANDMARK=, u.CUSTOMERAREA=Powai, u.CUSTOMERCITY=Mumbai, u.CUSTOMERSTATE=Maharashtra, u.CUSTOMERPINCODE=INTEGER[400076], u.CUSTOMERCOUNTRY=INDIA, u.CUSTOMERLATITUDE=DECIMAL[19.1093], u.CUSTOMERLONGITUDE=DECIMAL[72.854532], u.DELIVERNOTES=DONOTUSETHISPARAM, OrdersUpload_Page_End=, OrderAPI_Page_Start=, ordApi.orderNo=Ord_AUTOGEN[7]_test, ordApi.awbNumber=Ord_AUTOGEN[7]_test, ordApi.shipmentOrderTypeCd=DELIVER, ordApi.orderState=FORWARD, ordApi.shipmentOrderDt=DATE[NOW - (5DAYS)], ordApi.distributionCenter=LMDMumbai, ordApi.paymentType=Prepaid, ordApi.numberOfItems=INTEGER[10], ordApi.partialDeliveryAllowedFl=Y, ordApi.returnAllowedFl=Y, ordApi.cancellationAllowedFl=Y, ordApi.deliverBranch=LMDMumbai, ordApi.deliverServiceTime=INTEGER[15], ordApi.deliverStartTimeWindow=DATE[NOW + (50 MINUTES)], ordApi.deliverEndTimeWindow=DATE[NOW + (80 MINUTES)], ordApi.deliverAccountCode=Cust_AUTOGEN[4], ordApi.deliverAccountName=User_AUTOGEN[4], ordApi.deliverApartment=A901 Supreme Business Park, ordApi.deliverStreetName=South Avenue, ordApi.deliverLocality=Near Hiranandani Gardens, ordApi.deliverPhoneNumber=9AUTOGEN[9], ordApi.deliverCity=Mumbai, ordApi.deliverState=MH, ordApi.deliverCountry=IND, ordApi.deliverPinCode=INTEGER[400076], ordApi.deliverLatitude=DECIMAL[19.1093], ordApi.deliverLongitude=DECIMAL[72.854532], ordApi.returnBranch=LMDMumbai, OrderAPI_Page_End=, OLD_dATASET=, VehicleNumber=AUTOGEN, VehicleType=4 Wheeler, VehicleUnladenWt=1000.0, VehicleCapacityUnits=500.0, VehicleCapacityWtKgs=1000.0, VehicleCapacityVolumeCC=33.0, VehicleMake=Van, VehicleModel=Tempo, VehicleChasisNumber=AUTOGEN, VehicleEngineNumber=AUTOGEN, VehicleOwnership=Company, VehicleOwnerName=AUTOGEN, VehicleFinancer=AUTOGEN, Branch=LMDMumbai, UserGroup=MobileUser_LMDemo, DeliveryBoyFirstName=AUTOGEN, DeliveryBoyMobileNumber=AUTOGEN, DeliveryBoyIMEINumber=AUTOGEN, DeliveryBoyEmailID=AUTOGEN, DeliveryBoyUserName=AUTOGEN, DeliveryBoyPassword=AUTOGEN, DeliveryBoyCapacityInUnits=1.0, DeliveryBoyCapacityInWeights=5.0, DeliveryBoyCapacityInVolume=10.0, DeliveryBoyDateOfBirth=33635.0, DeliveryBoyGender=Male, OrderNumber=, OrderDate=, OrderStartDate=, OrderEndDate=, =})</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Loginext_Test_Suite-class-passed -->
+        </div> <!-- panel Loginext_Test_Suite -->
+        <div panel-name="test-xml-Loginext_Test_Suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <pre>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE suite SYSTEM &quot;http://testng.org/testng-1.0.dtd&quot;&gt;
+&lt;suite thread-count=&quot;2&quot; name=&quot;Loginext Test Suite&quot; parallel=&quot;tests&quot;&gt;
+  &lt;test name=&quot;Loginext Test - com.loginext.Scenarios.MobileTest.wikipediaTest.86240&quot;&gt;
+    &lt;parameter name=&quot;Datasheet&quot; value=&quot;DataMap&quot;/&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;com.loginext.Scenarios.MobileTest&quot;&gt;
+        &lt;methods&gt;
+          &lt;include name=&quot;wikipediaTest&quot;/&gt;
+        &lt;/methods&gt;
+      &lt;/class&gt; &lt;!-- com.loginext.Scenarios.MobileTest --&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Loginext Test - com.loginext.Scenarios.MobileTest.wikipediaTest.86240 --&gt;
+&lt;/suite&gt; &lt;!-- Loginext Test Suite --&gt;
+            </pre>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="testlist-Loginext_Test_Suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Tests for Loginext Test Suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <ul>
+              <li>
+                <span class="test-name">Loginext Test - com.loginext.Scenarios.MobileTest.wikipediaTest.86240 (1 class)</span>
+              </li>
+            </ul>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="group-Loginext_Test_Suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Groups for Loginext Test Suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="times-Loginext_Test_Suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Times for Loginext Test Suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="times-div">
+              <script type="text/javascript">
+suiteTableInitFunctions.push('tableData_Loginext_Test_Suite');
+function tableData_Loginext_Test_Suite() {
+var data = new google.visualization.DataTable();
+data.addColumn('number', 'Number');
+data.addColumn('string', 'Method');
+data.addColumn('string', 'Class');
+data.addColumn('number', 'Time (ms)');
+data.addRows(1);
+data.setCell(0, 0, 0)
+data.setCell(0, 1, 'wikipediaTest')
+data.setCell(0, 2, 'com.loginext.Scenarios.MobileTest')
+data.setCell(0, 3, 18213);
+window.suiteTableData['Loginext_Test_Suite']= { tableData: data, tableDiv: 'times-div-Loginext_Test_Suite'}
+return data;
+}
+              </script>
+              <span class="suite-total-time">Total running time: 18 seconds</span>
+              <div id="times-div-Loginext_Test_Suite">
+              </div> <!-- times-div-Loginext_Test_Suite -->
+            </div> <!-- times-div -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="reporter-Loginext_Test_Suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Reporter output for Loginext Test Suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="ignored-methods-Loginext_Test_Suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">0 ignored methods</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="chronological-Loginext_Test_Suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Methods in chronological order</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="chronological-class">
+              <div class="chronological-class-name">com.loginext.Scenarios.MobileTest</div> <!-- chronological-class-name -->
+              <div class="test-method">
+                <span class="method-name">wikipediaTest({ClientName=, URL=, UserName=, Password=, Orders_Page_Start=, distributionCenter=LMDMumbai, hubName=...)</span>
+                <span class="method-start">0 ms</span>
+              </div> <!-- test-method -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+      </div> <!-- main-panel-root -->
+    </div> <!-- wrapper -->
+  </body>
+</html>

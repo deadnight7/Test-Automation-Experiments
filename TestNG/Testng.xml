@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="MileDemo" verbose="10" parallel="methods"
+	thread-count="5">
+	<test name="Mile">
+		<classes><!-- <class name="com.loginext.Executor.MainRun"> <methods> <include 
+				name="driverScript"></include><exclude name="lastMileOrderCreation"></exclude> 
+				<exclude name="saasOrderCreation"></exclude> </methods> </class> -->
+		</classes>
+	</test>
+
+</suite>

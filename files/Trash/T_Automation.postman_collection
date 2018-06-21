@@ -1,0 +1,3559 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Mile Automation",
+		"_postman_id": "7b6fcfb4-7d5c-4016-f627-71b390c0f688",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Mile Sanity",
+			"description": "",
+			"item": [
+				{
+					"name": "Authentication",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var t1=postman.getResponseHeader(\"CLIENT_SECRET_KEY\");",
+									"var t2=postman.getResponseHeader(\"WWW-Authenticate\");",
+									"",
+									"postman.setEnvironmentVariable(\"CLIENT_SECRET_KEY\", t1);",
+									"",
+									"postman.setEnvironmentVariable(\"WWW-Authenticate\", t2);",
+									"",
+									"",
+									"postman.setEnvironmentVariable('random1', 100+Math.floor(Math.random() * 10000000));",
+									"postman.setEnvironmentVariable('random2', 9800000000+Math.floor(Math.random() * 99999999));",
+									"",
+									"postman.setEnvironmentVariable('timestampUtcIso8601', (new Date()).toISOString());",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"tests[\"Pass\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{url}}/LoginApp/login/authenticate",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "",
+								"value": "",
+								"description": "",
+								"disabled": true
+							},
+							{
+								"key": "",
+								"value": "",
+								"description": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"userName\":\"test@test.com\",\n        \"password\":\"test\"\n}  \n\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get branch",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Pass\"] = responseCode.code === 200;",
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"branch\",  jsonData[0].name);",
+									"postman.setEnvironmentVariable(\"branchid\",  jsonData[0].id);",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{url}}/LookupApp/lookup/branches/hierarchy",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "CLIENT_SECRET_KEY",
+								"value": "{{CLIENT_SECRET_KEY}}",
+								"description": ""
+							},
+							{
+								"key": "WWW-Authenticate",
+								"value": "{{WWW-Authenticate}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"userName\":\"sameer.shirke@pispl.in\",\n        \"password\":\"admin\"\n}  "
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get user group",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Pass\"] = responseCode.code === 200;",
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"user_group\",  jsonData[0].name);"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": {
+							"raw": "{{url}}/LookupApp/lookup/usergroups?ismobilegroup=true",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"LookupApp",
+								"lookup",
+								"usergroups"
+							],
+							"query": [
+								{
+									"key": "ismobilegroup",
+									"value": "true",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "WWW-Authenticate",
+								"value": "{{WWW-Authenticate}}",
+								"description": ""
+							},
+							{
+								"key": "CLIENT_SECRET_KEY",
+								"value": "{{CLIENT_SECRET_KEY}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"userName\":\"sameer.shirke@pispl.in\",\n        \"password\":\"admin\"\n}  "
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create DB",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Pass\"] = responseCode.code === 201;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"dmreference_id\", jsonData.data[0]);",
+									"",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{url}}/DeliveryMediumApp/mile/v1/create",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "WWW-Authenticate",
+								"value": "{{WWW-Authenticate}}",
+								"description": ""
+							},
+							{
+								"key": "CLIENT_SECRET_KEY",
+								"value": "{{CLIENT_SECRET_KEY}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n  {\n    \"employeeId\": {{random1}},\n    \"userGroupName\": \"{{user_group}}\",\n    \"branchName\": \"{{branch}}\",\n    \"deliveryMediumMasterName\": \"Auto{{random1}}\",\n    \"phoneNumber\": {{random2}},\n    \"licenseNumber\":\"{{random1}}\",\n    \"emailId\": \"test@test.com\",\n    \"userName\": \"U{{random1}}\",\n    \"password\": \"admin\",\n    \"capacityInUnits\": 10,\n    \"capacityInVolume\": 0,\n    \"capacityInWeight\": 0,\n    \"dob\": \"2016-12-12\",\n    \"gender\": \"Male\",\n    \"deliveryMediumMasterTypeCd\": \"Delivery Boy\",\n    \"isOwnVehicleFl\": \"Company\",\n    \n    \"weeklyOffList\": [\n      \"Thursday\",\n      \"Monday\"\n    ],\n    \"maxDistance\": 100,\n    \"licenseValidity\": \"2016-12-13\",\n    \"deliveryMediumMapList\": [\n      {\n        \"name\": \"HINDI\"\n\n      },\n      {\n        \"name\": \"ENGLISH\"\n\n      }\n    ],\n    \"shiftList\": [\n      {\n        \"shiftStartTime\": \"2016-12-12T13:30:00Z\",\n        \"shiftEndTime\": \"2016-12-12T14:30:00Z\"\n      }\n    ],\n    \"dmPreference\": \"400001\"\n  }\n]"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get DB id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Pass\"] = responseCode.code === 200;",
+									"",
+									"",
+									"var searchJSON = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"dm_id\",searchJSON.data.results[0].deliveryMediumMasterId);",
+									"postman.setEnvironmentVariable(\"dm_name\",searchJSON.data.results[0].deliveryMediumMasterName);",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": {
+							"raw": "{{url}}/DeliveryMediumApp/deliverymedium/fmlm/list?pageNumber=1&pageSize=50&searchBy=deliveryMediumMasterName&searchText=Auto{{random1}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"DeliveryMediumApp",
+								"deliverymedium",
+								"fmlm",
+								"list"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "1",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "pageSize",
+									"value": "50",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "searchBy",
+									"value": "deliveryMediumMasterName",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "searchText",
+									"value": "Auto{{random1}}",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "WWW-Authenticate",
+								"value": "{{WWW-Authenticate}}",
+								"description": ""
+							},
+							{
+								"key": "CLIENT_SECRET_KEY",
+								"value": "{{CLIENT_SECRET_KEY}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Create Order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Pass\"] = responseCode.code === 200;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"reference_id\", jsonData.referenceId);",
+									"",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{url}}/ShipmentApp/mile/v1/create",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "WWW-Authenticate",
+								"value": "{{WWW-Authenticate}}",
+								"description": ""
+							},
+							{
+								"key": "CLIENT_SECRET_KEY",
+								"value": "{{CLIENT_SECRET_KEY}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  {\r\n    \"orderNo\": \"C{{random1}}\",\r\n    \"awbNumber\": {{random1}},\r\n    \"shipmentOrderTypeCd\": \"DELIVER\",\r\n    \"orderState\": \"FORWARD\",\r\n    \"shipmentOrderDt\": \"2017-06-02T06:00:00.000Z\",\r\n    \"distributionCenter\": \"{{branch}}\",\r\n    \"paymentType\": \"Prepaid\",\r\n    \"numberOfItems\": \"1\",\r\n    \"partialDeliveryAllowedFl\": \"Y\",\r\n    \"returnAllowedFl\": \"Y\",\r\n    \"cancellationAllowedFl\": \"N\",    \r\n    \"deliverBranch\": \"{{branch}}\",\r\n    \"deliverServiceTime\": \"12\",\r\n    \"deliverEndTimeWindow\":\"{{timestampUtcIso8601}}\",\r\n    \"deliverStartTimeWindow\":\"{{timestampUtcIso8601}}\",\r\n    \"deliverAccountCode\": {{random1}},\r\n    \"deliverAccountName\": {{random1}}, \r\n    \"deliverApartment\": \"supreme business park\",\r\n    \"deliverStreetName\": \"hiranandani\",\r\n    \"deliverLocality\": \"powai\",\r\n    \"deliverPhoneNumber\":{{random2}},\r\n    \"deliverCity\": \"Mumbai\",\r\n    \"deliverState\": \"MH\",\r\n    \"deliverCountry\": \"SGP\",\r\n    \"deliverPinCode\": \"400076\",\r\n    \"deliverLatitude\":\"19.124497\",\r\n    \"deliverLongitude\":\"72.893675\", \r\n    \"returnBranch\": \"{{branch}}\"\r\n  }\r\n  \r\n]\r\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delay",
+					"request": {
+						"url": "https://postman-echo.com/delay/10",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "WWW-Authenticate",
+								"value": "{{WWW-Authenticate}}",
+								"description": "",
+								"disabled": true
+							},
+							{
+								"key": "CLIENT_SECRET_KEY",
+								"value": "{{CLIENT_SECRET_KEY}}",
+								"description": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  {\r\n    \"orderNo\": \"C{{random1}}\",\r\n    \"awbNumber\": {{random1}},\r\n    \"shipmentOrderTypeCd\": \"DELIVER\",\r\n    \"orderState\": \"FORWARD\",\r\n    \"shipmentOrderDt\": \"2017-06-02T06:00:00.000Z\",\r\n    \"distributionCenter\": \"{{branch}}\",\r\n    \"paymentType\": \"Prepaid\",\r\n    \"numberOfItems\": \"1\",\r\n    \"partialDeliveryAllowedFl\": \"Y\",\r\n    \"returnAllowedFl\": \"Y\",\r\n    \"cancellationAllowedFl\": \"N\",    \r\n    \"deliverBranch\": \"{{branch}}\",\r\n    \"deliverServiceTime\": \"12\",\r\n    \"deliverEndTimeWindow\":\"{{timestampUtcIso8601}}\",\r\n    \"deliverStartTimeWindow\":\"{{timestampUtcIso8601}}\",\r\n    \"deliverAccountCode\": {{random1}},\r\n    \"deliverAccountName\": {{random1}}, \r\n    \"deliverApartment\": \"supreme business park\",\r\n    \"deliverStreetName\": \"hiranandani\",\r\n    \"deliverLocality\": \"powai\",\r\n    \"deliverPhoneNumber\":{{random2}},\r\n    \"deliverCity\": \"Mumbai\",\r\n    \"deliverState\": \"MH\",\r\n    \"deliverCountry\": \"SGP\",\r\n    \"deliverPinCode\": \"400076\",\r\n    \"deliverLatitude\":\"19.124497\",\r\n    \"deliverLongitude\":\"72.893675\", \r\n    \"returnBranch\": \"{{branch}}\"\r\n  }\r\n  \r\n]\r\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Pass\"] = responseCode.code === 200;",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": {
+							"raw": "{{url}}/ShipmentApp/mile/v1/shipment?end_date=2019-03-07+18:29:59&start_date=2016-02-01+18:30:00&status=ALL&order_no=C{{random1}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ShipmentApp",
+								"mile",
+								"v1",
+								"shipment"
+							],
+							"query": [
+								{
+									"key": "end_date",
+									"value": "2019-03-07+18:29:59",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "start_date",
+									"value": "2016-02-01+18:30:00",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "status",
+									"value": "ALL",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "order_no",
+									"value": "C{{random1}}",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "WWW-Authenticate",
+								"value": "{{WWW-Authenticate}}",
+								"description": ""
+							},
+							{
+								"key": "CLIENT_SECRET_KEY",
+								"value": "{{CLIENT_SECRET_KEY}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n  {\n    \"employeeId\": {{random1}},\n    \"userGroupName\": \"LMDDemo\",\n    \"branchName\": \"LMDMumbai\",\n    \"deliveryMediumMasterName\": \"Amit\",\n    \"phoneNumber\": \"63865471261\",\n    \"imei\": \"123456789012645\",\n    \"emailId\": \"test@test.com\",\n    \"userName\": \"test003\",\n    \"password\": \"admin\",\n    \"capacityInUnits\": 10,\n    \"capacityInVolume\": 0,\n    \"capacityInWeight\": 0,\n    \"dob\": \"2016-12-12\",\n    \"gender\": \"Male\",\n    \"deliveryMediumMasterTypeCd\": \"Delivery Boy\",\n    \"isOwnVehicleFl\": \"Company\",\n    \"vehicleNumber\": \"MH034506\",\n    \"weeklyOffList\": [\n      \"Thursday\",\n      \"Monday\"\n    ],\n    \"maxDistance\": 100,\n    \"licenseValidity\": \"2016-12-13\",\n    \"deliveryMediumMapList\": [\n      {\n        \"name\": \"HINDI\"\n\n      },\n      {\n        \"name\": \"ENGLISH\"\n\n      }\n    ],\n    \"shiftList\": [\n      {\n        \"shiftStartTime\": \"2016-12-12T13:30:00Z\",\n        \"shiftEndTime\": \"2016-12-12T14:30:00Z\"\n      }\n    ],\n    \"dmPreference\": \"400001\"\n  }\n]"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delay copy",
+					"request": {
+						"url": "https://postman-echo.com/delay/10",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "WWW-Authenticate",
+								"value": "{{WWW-Authenticate}}",
+								"description": "",
+								"disabled": true
+							},
+							{
+								"key": "CLIENT_SECRET_KEY",
+								"value": "{{CLIENT_SECRET_KEY}}",
+								"description": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  {\r\n    \"orderNo\": \"C{{random1}}\",\r\n    \"awbNumber\": {{random1}},\r\n    \"shipmentOrderTypeCd\": \"DELIVER\",\r\n    \"orderState\": \"FORWARD\",\r\n    \"shipmentOrderDt\": \"2017-06-02T06:00:00.000Z\",\r\n    \"distributionCenter\": \"{{branch}}\",\r\n    \"paymentType\": \"Prepaid\",\r\n    \"numberOfItems\": \"1\",\r\n    \"partialDeliveryAllowedFl\": \"Y\",\r\n    \"returnAllowedFl\": \"Y\",\r\n    \"cancellationAllowedFl\": \"N\",    \r\n    \"deliverBranch\": \"{{branch}}\",\r\n    \"deliverServiceTime\": \"12\",\r\n    \"deliverEndTimeWindow\":\"{{timestampUtcIso8601}}\",\r\n    \"deliverStartTimeWindow\":\"{{timestampUtcIso8601}}\",\r\n    \"deliverAccountCode\": {{random1}},\r\n    \"deliverAccountName\": {{random1}}, \r\n    \"deliverApartment\": \"supreme business park\",\r\n    \"deliverStreetName\": \"hiranandani\",\r\n    \"deliverLocality\": \"powai\",\r\n    \"deliverPhoneNumber\":{{random2}},\r\n    \"deliverCity\": \"Mumbai\",\r\n    \"deliverState\": \"MH\",\r\n    \"deliverCountry\": \"SGP\",\r\n    \"deliverPinCode\": \"400076\",\r\n    \"deliverLatitude\":\"19.124497\",\r\n    \"deliverLongitude\":\"72.893675\", \r\n    \"returnBranch\": \"{{branch}}\"\r\n  }\r\n  \r\n]\r\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Order Shipment Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Pass\"] = responseCode.code === 200;",
+									"",
+									"var searchJSON = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"shipment_id\",searchJSON.data.results[0].shipmentId);",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": {
+							"raw": "{{url}}/ShipmentApp/shipment/fmlm?searchBy=orderNo&searchText=C{{random1}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ShipmentApp",
+								"shipment",
+								"fmlm"
+							],
+							"query": [
+								{
+									"key": "searchBy",
+									"value": "orderNo",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "searchText",
+									"value": "C{{random1}}",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "WWW-Authenticate",
+								"value": "{{WWW-Authenticate}}",
+								"description": ""
+							},
+							{
+								"key": "CLIENT_SECRET_KEY",
+								"value": "{{CLIENT_SECRET_KEY}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n  {\n    \"employeeId\": {{random1}},\n    \"userGroupName\": \"LMDDemo\",\n    \"branchName\": \"LMDMumbai\",\n    \"deliveryMediumMasterName\": \"Amit\",\n    \"phoneNumber\": \"63865471261\",\n    \"imei\": \"123456789012645\",\n    \"emailId\": \"test@test.com\",\n    \"userName\": \"test003\",\n    \"password\": \"admin\",\n    \"capacityInUnits\": 10,\n    \"capacityInVolume\": 0,\n    \"capacityInWeight\": 0,\n    \"dob\": \"2016-12-12\",\n    \"gender\": \"Male\",\n    \"deliveryMediumMasterTypeCd\": \"Delivery Boy\",\n    \"isOwnVehicleFl\": \"Company\",\n    \"vehicleNumber\": \"MH034506\",\n    \"weeklyOffList\": [\n      \"Thursday\",\n      \"Monday\"\n    ],\n    \"maxDistance\": 100,\n    \"licenseValidity\": \"2016-12-13\",\n    \"deliveryMediumMapList\": [\n      {\n        \"name\": \"HINDI\"\n\n      },\n      {\n        \"name\": \"ENGLISH\"\n\n      }\n    ],\n    \"shiftList\": [\n      {\n        \"shiftStartTime\": \"2016-12-12T13:30:00Z\",\n        \"shiftEndTime\": \"2016-12-12T14:30:00Z\"\n      }\n    ],\n    \"dmPreference\": \"400001\"\n  }\n]"
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Update Order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Pass\"] = responseCode.code === 200;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": {
+							"raw": "{{url}}/LoginApp/framework/label?labels=geofenceMasterForm",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"LoginApp",
+								"framework",
+								"label"
+							],
+							"query": [
+								{
+									"key": "labels",
+									"value": "geofenceMasterForm",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "WWW-Authenticate",
+								"value": "{{WWW-Authenticate}}",
+								"description": ""
+							},
+							{
+								"key": "CLIENT_SECRET_KEY",
+								"value": "{{CLIENT_SECRET_KEY}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Planning",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Pass\"] = responseCode.code === 200;",
+									"",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{url}}/TripApp/deliveryplanner/start",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "WWW-Authenticate",
+								"value": "{{WWW-Authenticate}}",
+								"description": ""
+							},
+							{
+								"key": "CLIENT_SECRET_KEY",
+								"value": "{{CLIENT_SECRET_KEY}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"routeName\":\"{{random1}}\",\n  \"startTime\": \"{{timestampUtcIso8601}}\",\n  \"endTime\": \"{{timestampUtcIso8601}}\",\n  \n \"deliveryMediums\":[{{dm_id}}],\n  \"shipmentIds\":[{{shipment_id}}]\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Status of Order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Pass\"] = responseCode.code === 200;",
+									"",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{url}}/ShipmentApp/mile/v1/status",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "WWW-Authenticate",
+								"value": "{{WWW-Authenticate}}",
+								"description": ""
+							},
+							{
+								"key": "CLIENT_SECRET_KEY",
+								"value": "{{CLIENT_SECRET_KEY}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\"{{reference_id}}\"]"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get trip details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Pass\"] = responseCode.code === 200;",
+									"",
+									"var searchJSON = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"trip_id\",searchJSON.data.results[0].trips[0].tripId);",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": {
+							"raw": "{{url}}/TripApp/trip/lmfm/triplist?pageNumber=1&pageSize=50&sortBy=estimatedStartDate&sortOrder=DESC&status=NOTSTARTED",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"TripApp",
+								"trip",
+								"lmfm",
+								"triplist"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "1",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "pageSize",
+									"value": "50",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "sortBy",
+									"value": "estimatedStartDate",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "sortOrder",
+									"value": "DESC",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "status",
+									"value": "NOTSTARTED",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "WWW-Authenticate",
+								"value": "{{WWW-Authenticate}}",
+								"description": ""
+							},
+							{
+								"key": "CLIENT_SECRET_KEY",
+								"value": "{{CLIENT_SECRET_KEY}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n  {\n    \"employeeId\": {{random1}},\n    \"userGroupName\": \"LMDDemo\",\n    \"branchName\": \"LMDMumbai\",\n    \"deliveryMediumMasterName\": \"Amit\",\n    \"phoneNumber\": \"63865471261\",\n    \"imei\": \"123456789012645\",\n    \"emailId\": \"test@test.com\",\n    \"userName\": \"test003\",\n    \"password\": \"admin\",\n    \"capacityInUnits\": 10,\n    \"capacityInVolume\": 0,\n    \"capacityInWeight\": 0,\n    \"dob\": \"2016-12-12\",\n    \"gender\": \"Male\",\n    \"deliveryMediumMasterTypeCd\": \"Delivery Boy\",\n    \"isOwnVehicleFl\": \"Company\",\n    \"vehicleNumber\": \"MH034506\",\n    \"weeklyOffList\": [\n      \"Thursday\",\n      \"Monday\"\n    ],\n    \"maxDistance\": 100,\n    \"licenseValidity\": \"2016-12-13\",\n    \"deliveryMediumMapList\": [\n      {\n        \"name\": \"HINDI\"\n\n      },\n      {\n        \"name\": \"ENGLISH\"\n\n      }\n    ],\n    \"shiftList\": [\n      {\n        \"shiftStartTime\": \"2016-12-12T13:30:00Z\",\n        \"shiftEndTime\": \"2016-12-12T14:30:00Z\"\n      }\n    ],\n    \"dmPreference\": \"400001\"\n  }\n]"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Manual assignment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Pass\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{url}}/ShipmentApp/shipment/fmlm/update",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "WWW-Authenticate",
+								"value": "{{WWW-Authenticate}}",
+								"description": ""
+							},
+							{
+								"key": "CLIENT_SECRET_KEY",
+								"value": "{{CLIENT_SECRET_KEY}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n  {\n  \"tripId\": {{trip_id}},\n  \"tripStatus\": \"NOTSTARTED\",\n  \"shipmentId\": {{shipment_id}}\n  }\n]\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Show DRS",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Pass\"] = responseCode.code === 200;",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": {
+							"raw": "{{url}}/ShipmentApp/shipment/fmlm/deliveryrunsheet?pageNumber=1&pageSize=200&status=DRS&tripId={{trip_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ShipmentApp",
+								"shipment",
+								"fmlm",
+								"deliveryrunsheet"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "1",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "pageSize",
+									"value": "200",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "status",
+									"value": "DRS",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "tripId",
+									"value": "{{trip_id}}",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "WWW-Authenticate",
+								"value": "{{WWW-Authenticate}}",
+								"description": ""
+							},
+							{
+								"key": "CLIENT_SECRET_KEY",
+								"value": "{{CLIENT_SECRET_KEY}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n{{trip_id}}\n]\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Mark Order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Pass\"] = responseCode.code === 200;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": {
+							"raw": "{{url}}/ShipmentApp/shipment/fmlm/status?status=DELIVERED",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ShipmentApp",
+								"shipment",
+								"fmlm",
+								"status"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "DELIVERED",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "WWW-Authenticate",
+								"value": "{{WWW-Authenticate}}",
+								"description": ""
+							},
+							{
+								"key": "CLIENT_SECRET_KEY",
+								"value": "{{CLIENT_SECRET_KEY}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n{\n  \"shipmentId\": {{shipment_id}},\n  \"currentStatus\": \"NOTDISPATCHED\",\n  \"isPartiallyDelivered\": false,\n  \"reason\": \"\"\n}\n]"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mile Regression",
+			"description": "",
+			"item": [
+				{
+					"name": "DASHBOARD",
+					"description": "",
+					"item": [
+						{
+							"name": "Get label1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Pass\"] = responseCode.code === 200;"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": {
+									"raw": "{{url}}/LoginApp/framework/label?labels=apply,cancel,to,from,customDate,today,yesterday,thisWeek,last7Days,thisMonth,last30Days,daysOfWeek,monthNames,tomorrow,next7Days,nextWeek,next30Days",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"LoginApp",
+										"framework",
+										"label"
+									],
+									"query": [
+										{
+											"key": "labels",
+											"value": "apply,cancel,to,from,customDate,today,yesterday,thisWeek,last7Days,thisMonth,last30Days,daysOfWeek,monthNames,tomorrow,next7Days,nextWeek,next30Days",
+											"equals": true,
+											"description": ""
+										}
+									],
+									"variable": []
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "CLIENT_SECRET_KEY",
+										"value": "{{CLIENT_SECRET_KEY}}",
+										"description": ""
+									},
+									{
+										"key": "WWW-Authenticate",
+										"value": "{{WWW-Authenticate}}",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n        \"userName\":\"beta1@loginextsolutions.com\",\n        \"password\":\"admin\"\n}  \n\n"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Get label2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Pass\"] = responseCode.code === 200;"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": {
+									"raw": "{{url}}/LoginApp/framework/label?labels=todaysActivities,deliveryLegDetails,resourceAvailability,totalDeliveries,ordersNotCompleted,deliveryBoy,delayedOrders,orderStates,vehicle,driver,delayedDeliveryBoysIntransit,deliveryBoys,pickupLegDetails,totalPickups,deliverTotalDeliveriesMessage,deliverOrdersNotCompletedMessage,deliverDelayedOrdersMessage,deliverOrdersStateMessage,perPage,of,intransit,Intransit,Inactive,available,Available,offline,onlineWeakSignal,onlineStrongSignal,NOTDISPATCHED,NOTCOMPLETED,COMPLETED,CANCELLED,INTRANSIT,BEFORETIMEDISPATCH,DELAYEDDISPATCH,ONTIMEDISPATCH,RETURN,RTM,FORWARD,DELAYEDNOTDISPATCHED,PICKEDUP,enterDbName,activeTags,noDataAvailable,absent,busy,inactive,OrdersNotDispatched,OrdersOtherReasons,OrdersRTM,OrdersLateDispatched,Inactive,Intransit,Absent,OrdersLateStarted,OrdersNotStarted,branch,account",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"LoginApp",
+										"framework",
+										"label"
+									],
+									"query": [
+										{
+											"key": "labels",
+											"value": "todaysActivities,deliveryLegDetails,resourceAvailability,totalDeliveries,ordersNotCompleted,deliveryBoy,delayedOrders,orderStates,vehicle,driver,delayedDeliveryBoysIntransit,deliveryBoys,pickupLegDetails,totalPickups,deliverTotalDeliveriesMessage,deliverOrdersNotCompletedMessage,deliverDelayedOrdersMessage,deliverOrdersStateMessage,perPage,of,intransit,Intransit,Inactive,available,Available,offline,onlineWeakSignal,onlineStrongSignal,NOTDISPATCHED,NOTCOMPLETED,COMPLETED,CANCELLED,INTRANSIT,BEFORETIMEDISPATCH,DELAYEDDISPATCH,ONTIMEDISPATCH,RETURN,RTM,FORWARD,DELAYEDNOTDISPATCHED,PICKEDUP,enterDbName,activeTags,noDataAvailable,absent,busy,inactive,OrdersNotDispatched,OrdersOtherReasons,OrdersRTM,OrdersLateDispatched,Inactive,Intransit,Absent,OrdersLateStarted,OrdersNotStarted,branch,account",
+											"equals": true,
+											"description": ""
+										}
+									],
+									"variable": []
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "CLIENT_SECRET_KEY",
+										"value": "{{CLIENT_SECRET_KEY}}",
+										"description": ""
+									},
+									{
+										"key": "WWW-Authenticate",
+										"value": "{{WWW-Authenticate}}",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n        \"userName\":\"beta1@loginextsolutions.com\",\n        \"password\":\"admin\"\n}  \n\n"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "ReportingApp call",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Pass\"] = responseCode.code === 200;"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": {
+									"raw": "{{url}}/ReportingApp/dashboard/FMLM/DelayedDMLocation?pageNumber=1&pageSize=15",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"ReportingApp",
+										"dashboard",
+										"FMLM",
+										"DelayedDMLocation"
+									],
+									"query": [
+										{
+											"key": "pageNumber",
+											"value": "1",
+											"equals": true,
+											"description": ""
+										},
+										{
+											"key": "pageSize",
+											"value": "15",
+											"equals": true,
+											"description": ""
+										}
+									],
+									"variable": []
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "CLIENT_SECRET_KEY",
+										"value": "{{CLIENT_SECRET_KEY}}",
+										"description": ""
+									},
+									{
+										"key": "WWW-Authenticate",
+										"value": "{{WWW-Authenticate}}",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Get label3",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Pass\"] = responseCode.code === 200;"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": {
+									"raw": "{{url}}/LoginApp/framework/label?labels=DELIVERED,INTRANSIT,NOTDISPATCHED,PICKEDUP,NOTPICKEDUP,NOTDELIVERED,CANCELLED,DELIVER,FORWARD,REVERSE,RTM,PICKUP,DELIVERYLOCATION,PICKUPLOCATION,STARTED,NOTSTARTED,ENDED,PENDING,CONFIRMED,INTRANSITCONFIRMED,ARRIVED,CANCELLED_OD,DELAYEDDISPATCH_OD,DELAYEDPICKUP,DELAYEDDELIVERY,INSCANNED,OUTSCANNED,HANDEDOVER,CLOSED,NOTSCANNED,CASH,CARD_AUTO,CARD_MANUAL,MOMOE,COD,PREPAID",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"LoginApp",
+										"framework",
+										"label"
+									],
+									"query": [
+										{
+											"key": "labels",
+											"value": "DELIVERED,INTRANSIT,NOTDISPATCHED,PICKEDUP,NOTPICKEDUP,NOTDELIVERED,CANCELLED,DELIVER,FORWARD,REVERSE,RTM,PICKUP,DELIVERYLOCATION,PICKUPLOCATION,STARTED,NOTSTARTED,ENDED,PENDING,CONFIRMED,INTRANSITCONFIRMED,ARRIVED,CANCELLED_OD,DELAYEDDISPATCH_OD,DELAYEDPICKUP,DELAYEDDELIVERY,INSCANNED,OUTSCANNED,HANDEDOVER,CLOSED,NOTSCANNED,CASH,CARD_AUTO,CARD_MANUAL,MOMOE,COD,PREPAID",
+											"equals": true,
+											"description": ""
+										}
+									],
+									"variable": []
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "CLIENT_SECRET_KEY",
+										"value": "{{CLIENT_SECRET_KEY}}",
+										"description": ""
+									},
+									{
+										"key": "WWW-Authenticate",
+										"value": "{{WWW-Authenticate}}",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Call for advanced filter",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Pass\"] = responseCode.code === 200;"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": {
+									"raw": "{{url}}/LoginApp/framework/label?labels=advancedFilters,saved,current,noSavedSearch,noFilterAddedYet,searchNotSavedYet,addAFilter,filterName,filterNameRequired,htmlTagsNotAllowed,invalidFilterDetails,duplicateFilterName,searchNotUpdatedYet,newFilter",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"LoginApp",
+										"framework",
+										"label"
+									],
+									"query": [
+										{
+											"key": "labels",
+											"value": "advancedFilters,saved,current,noSavedSearch,noFilterAddedYet,searchNotSavedYet,addAFilter,filterName,filterNameRequired,htmlTagsNotAllowed,invalidFilterDetails,duplicateFilterName,searchNotUpdatedYet,newFilter",
+											"equals": true,
+											"description": ""
+										}
+									],
+									"variable": []
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "CLIENT_SECRET_KEY",
+										"value": "{{CLIENT_SECRET_KEY}}",
+										"description": ""
+									},
+									{
+										"key": "WWW-Authenticate",
+										"value": "{{WWW-Authenticate}}",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Get Mile dashboard",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Pass\"] = responseCode.code === 200;"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": {
+									"raw": "{{url}}/LoginApp/framework/filter/list?pageName=MILE_DASHBOARD&sectionName=MILE_DASHBOARD",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"LoginApp",
+										"framework",
+										"filter",
+										"list"
+									],
+									"query": [
+										{
+											"key": "pageName",
+											"value": "MILE_DASHBOARD",
+											"equals": true,
+											"description": ""
+										},
+										{
+											"key": "sectionName",
+											"value": "MILE_DASHBOARD",
+											"equals": true,
+											"description": ""
+										}
+									],
+									"variable": []
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "CLIENT_SECRET_KEY",
+										"value": "{{CLIENT_SECRET_KEY}}",
+										"description": ""
+									},
+									{
+										"key": "WWW-Authenticate",
+										"value": "{{WWW-Authenticate}}",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Advanced filters",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Pass\"] = responseCode.code === 200;"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": {
+									"raw": "{{url}}/LoginApp/framework/filter/list?pageName=MILE_DASHBOARD&sectionName=MILE_DASHBOARD",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"LoginApp",
+										"framework",
+										"filter",
+										"list"
+									],
+									"query": [
+										{
+											"key": "pageName",
+											"value": "MILE_DASHBOARD",
+											"equals": true,
+											"description": ""
+										},
+										{
+											"key": "sectionName",
+											"value": "MILE_DASHBOARD",
+											"equals": true,
+											"description": ""
+										}
+									],
+									"variable": []
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "CLIENT_SECRET_KEY",
+										"value": "{{CLIENT_SECRET_KEY}}",
+										"description": ""
+									},
+									{
+										"key": "WWW-Authenticate",
+										"value": "{{WWW-Authenticate}}",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "PageLabelStructure",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Pass\"] = responseCode.code === 200;"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": {
+									"raw": "{{url}}/LoginApp/framework/structure?pageName=PAGE_LABEL_STRUCTURE&modelName=PAGE_LABEL_STRUCTURE&sectionName=PAGE_LABEL_STRUCTURE",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"LoginApp",
+										"framework",
+										"structure"
+									],
+									"query": [
+										{
+											"key": "pageName",
+											"value": "PAGE_LABEL_STRUCTURE",
+											"equals": true,
+											"description": ""
+										},
+										{
+											"key": "modelName",
+											"value": "PAGE_LABEL_STRUCTURE",
+											"equals": true,
+											"description": ""
+										},
+										{
+											"key": "sectionName",
+											"value": "PAGE_LABEL_STRUCTURE",
+											"equals": true,
+											"description": ""
+										}
+									],
+									"variable": []
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "CLIENT_SECRET_KEY",
+										"value": "{{CLIENT_SECRET_KEY}}",
+										"description": ""
+									},
+									{
+										"key": "WWW-Authenticate",
+										"value": "{{WWW-Authenticate}}",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"address\": \"Address\",\n\t\"areYouSureChangeDrsOrder\": \"Are you sure you want to change the DRS Order ?\",\n\t\"avgDetentionMins\": \"Avg Detention in mins\",\n\t\"batteryPercentage\": \"Battery\",\n\t\"capacity\": \"Capacity\",\n\t\"contactNo\": \"Contact No.\",\n\t\"createdOn\": \"Created On\",\n\t\"currentLocation\": \"Current Location \",\n\t\"customerName\": \"Customer name\",\n\t\"deliveryBoy\": \"Delivery Associate\",\n\t\"deliveryBoyName\": \"Delivery Associate Name\",\n\t\"direction\": \"Direction\",\n\t\"distance\": \"Mile\",\n\t\"distanceInKms\": \"Distance in Kms\",\n\t\"dropMarkerOrderAllocation\": \"Drop the marker and click on the path where you want the Order to be allocated\",\n\t\"endDate\": \"End Date\",\n\t\"endTime\": \"End Time\",\n\t\"eta\": \"ETA\",\n\t\"fetching\": \"Fetching\",\n\t\"fuel\": \"Fuel\",\n\t\"geofenceName\": \"Geofence Name\",\n\t\"highAlert\": \"High Alert\",\n\t\"hub\": \"Hub List\",\n\t\"ignition\": \"Ignition\",\n\t\"invalid\": \"Invalid\",\n\t\"invalidTemperatureMsg\": \"Sensor not connected\",\n\t\"isManuallyAssignedFlFalse\": \"Planning\",\n\t\"isManuallyAssignedFlTrue\": \"Manually \",\n\t\"lastLocation\": \"Last Location\",\n\t\"lastTrackedDate\": \"Last Tracked Date\",\n\t\"latitude\": \"Latitude\",\n\t\"location\": \"Location\",\n\t\"locationNotFound\": \"Location Not Found\",\n\t\"locationType\": \"Location Type\",\n\t\"longitude\": \"Longitude\",\n\t\"lowAlert\": \"Low Alert\",\n\t\"maxDetentionMins\": \"Max Detention in mins\",\n\t\"name\": \"Name\",\n\t\"no\": \"NO\",\n\t\"noDataChangesMessage\": \"You have not made any changes\",\n\t\"notAvailable\": \"Not Available\",\n\t\"odometer\": \"Mileage\",\n\t\"or\": \"OR\",\n\t\"orderNumber\": \"Order Number\",\n\t\"phoneNumber\": \"Phone Number\",\n\t\"position\": \"Position\",\n\t\"radius\": \"Radius\",\n\t\"speed\": \"Kmph\",\n\t\"speed_label\": \"Speed\",\n\t\"startDate\": \"Start Date\",\n\t\"startTime\": \"Start Time\",\n\t\"temperature\": \"Temperature(°C)\",\n\t\"trackerId\": \"Tracker Id\",\n\t\"transferTime\": \"Transfer Time\",\n\t\"tripName\": \"Active Trip\",\n\t\"trips\": \"Trips\",\n\t\"units\": \"Units\",\n\t\"vehicleNumber\": \"Vehicle No.\",\n\t\"volume\": \"Cc\",\n\t\"weight\": \"Kg\",\n\t\"yes\": \"YES\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "DynamicLabels call1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Pass\"] = responseCode.code === 200;"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": {
+									"raw": "{{url}}/LoginApp/framework/structure?pageName=PAGE_LABEL_STRUCTURE&modelName=PAGE_LABEL_STRUCTURE&sectionName=PAGE_LABEL_STRUCTURE",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"LoginApp",
+										"framework",
+										"structure"
+									],
+									"query": [
+										{
+											"key": "pageName",
+											"value": "PAGE_LABEL_STRUCTURE",
+											"equals": true,
+											"description": ""
+										},
+										{
+											"key": "modelName",
+											"value": "PAGE_LABEL_STRUCTURE",
+											"equals": true,
+											"description": ""
+										},
+										{
+											"key": "sectionName",
+											"value": "PAGE_LABEL_STRUCTURE",
+											"equals": true,
+											"description": ""
+										}
+									],
+									"variable": []
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "CLIENT_SECRET_KEY",
+										"value": "{{CLIENT_SECRET_KEY}}",
+										"description": ""
+									},
+									{
+										"key": "WWW-Authenticate",
+										"value": "{{WWW-Authenticate}}",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"address\": \"Address\",\n\t\"areYouSureChangeDrsOrder\": \"Are you sure you want to change the DRS Order ?\",\n\t\"avgDetentionMins\": \"Avg Detention in mins\",\n\t\"batteryPercentage\": \"Battery\",\n\t\"capacity\": \"Capacity\",\n\t\"contactNo\": \"Contact No.\",\n\t\"createdOn\": \"Created On\",\n\t\"currentLocation\": \"Current Location \",\n\t\"customerName\": \"Customer name\",\n\t\"deliveryBoy\": \"Delivery Associate\",\n\t\"deliveryBoyName\": \"Delivery Associate Name\",\n\t\"direction\": \"Direction\",\n\t\"distance\": \"Mile\",\n\t\"distanceInKms\": \"Distance in Kms\",\n\t\"dropMarkerOrderAllocation\": \"Drop the marker and click on the path where you want the Order to be allocated\",\n\t\"endDate\": \"End Date\",\n\t\"endTime\": \"End Time\",\n\t\"eta\": \"ETA\",\n\t\"fetching\": \"Fetching\",\n\t\"fuel\": \"Fuel\",\n\t\"geofenceName\": \"Geofence Name\",\n\t\"highAlert\": \"High Alert\",\n\t\"hub\": \"Hub List\",\n\t\"ignition\": \"Ignition\",\n\t\"invalid\": \"Invalid\",\n\t\"invalidTemperatureMsg\": \"Sensor not connected\",\n\t\"isManuallyAssignedFlFalse\": \"Planning\",\n\t\"isManuallyAssignedFlTrue\": \"Manually \",\n\t\"lastLocation\": \"Last Location\",\n\t\"lastTrackedDate\": \"Last Tracked Date\",\n\t\"latitude\": \"Latitude\",\n\t\"location\": \"Location\",\n\t\"locationNotFound\": \"Location Not Found\",\n\t\"locationType\": \"Location Type\",\n\t\"longitude\": \"Longitude\",\n\t\"lowAlert\": \"Low Alert\",\n\t\"maxDetentionMins\": \"Max Detention in mins\",\n\t\"name\": \"Name\",\n\t\"no\": \"NO\",\n\t\"noDataChangesMessage\": \"You have not made any changes\",\n\t\"notAvailable\": \"Not Available\",\n\t\"odometer\": \"Mileage\",\n\t\"or\": \"OR\",\n\t\"orderNumber\": \"Order Number\",\n\t\"phoneNumber\": \"Phone Number\",\n\t\"position\": \"Position\",\n\t\"radius\": \"Radius\",\n\t\"speed\": \"Kmph\",\n\t\"speed_label\": \"Speed\",\n\t\"startDate\": \"Start Date\",\n\t\"startTime\": \"Start Time\",\n\t\"temperature\": \"Temperature(°C)\",\n\t\"trackerId\": \"Tracker Id\",\n\t\"transferTime\": \"Transfer Time\",\n\t\"tripName\": \"Active Trip\",\n\t\"trips\": \"Trips\",\n\t\"units\": \"Units\",\n\t\"vehicleNumber\": \"Vehicle No.\",\n\t\"volume\": \"Cc\",\n\t\"weight\": \"Kg\",\n\t\"yes\": \"YES\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "DynamicLabels call2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Pass\"] = responseCode.code === 200;"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": {
+									"raw": "{{url}}/LoginApp/framework/structure?pageName=PAGE_LABEL_STRUCTURE&modelName=PAGE_LABEL_STRUCTURE&sectionName=PAGE_LABEL_STRUCTURE",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"LoginApp",
+										"framework",
+										"structure"
+									],
+									"query": [
+										{
+											"key": "pageName",
+											"value": "PAGE_LABEL_STRUCTURE",
+											"equals": true,
+											"description": ""
+										},
+										{
+											"key": "modelName",
+											"value": "PAGE_LABEL_STRUCTURE",
+											"equals": true,
+											"description": ""
+										},
+										{
+											"key": "sectionName",
+											"value": "PAGE_LABEL_STRUCTURE",
+											"equals": true,
+											"description": ""
+										}
+									],
+									"variable": []
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "CLIENT_SECRET_KEY",
+										"value": "{{CLIENT_SECRET_KEY}}",
+										"description": ""
+									},
+									{
+										"key": "WWW-Authenticate",
+										"value": "{{WWW-Authenticate}}",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"address\": \"Address\",\n\t\"areYouSureChangeDrsOrder\": \"Are you sure you want to change the DRS Order ?\",\n\t\"avgDetentionMins\": \"Avg Detention in mins\",\n\t\"batteryPercentage\": \"Battery\",\n\t\"capacity\": \"Capacity\",\n\t\"contactNo\": \"Contact No.\",\n\t\"createdOn\": \"Created On\",\n\t\"currentLocation\": \"Current Location \",\n\t\"customerName\": \"Customer name\",\n\t\"deliveryBoy\": \"Delivery Associate\",\n\t\"deliveryBoyName\": \"Delivery Associate Name\",\n\t\"direction\": \"Direction\",\n\t\"distance\": \"Mile\",\n\t\"distanceInKms\": \"Distance in Kms\",\n\t\"dropMarkerOrderAllocation\": \"Drop the marker and click on the path where you want the Order to be allocated\",\n\t\"endDate\": \"End Date\",\n\t\"endTime\": \"End Time\",\n\t\"eta\": \"ETA\",\n\t\"fetching\": \"Fetching\",\n\t\"fuel\": \"Fuel\",\n\t\"geofenceName\": \"Geofence Name\",\n\t\"highAlert\": \"High Alert\",\n\t\"hub\": \"Hub List\",\n\t\"ignition\": \"Ignition\",\n\t\"invalid\": \"Invalid\",\n\t\"invalidTemperatureMsg\": \"Sensor not connected\",\n\t\"isManuallyAssignedFlFalse\": \"Planning\",\n\t\"isManuallyAssignedFlTrue\": \"Manually \",\n\t\"lastLocation\": \"Last Location\",\n\t\"lastTrackedDate\": \"Last Tracked Date\",\n\t\"latitude\": \"Latitude\",\n\t\"location\": \"Location\",\n\t\"locationNotFound\": \"Location Not Found\",\n\t\"locationType\": \"Location Type\",\n\t\"longitude\": \"Longitude\",\n\t\"lowAlert\": \"Low Alert\",\n\t\"maxDetentionMins\": \"Max Detention in mins\",\n\t\"name\": \"Name\",\n\t\"no\": \"NO\",\n\t\"noDataChangesMessage\": \"You have not made any changes\",\n\t\"notAvailable\": \"Not Available\",\n\t\"odometer\": \"Mileage\",\n\t\"or\": \"OR\",\n\t\"orderNumber\": \"Order Number\",\n\t\"phoneNumber\": \"Phone Number\",\n\t\"position\": \"Position\",\n\t\"radius\": \"Radius\",\n\t\"speed\": \"Kmph\",\n\t\"speed_label\": \"Speed\",\n\t\"startDate\": \"Start Date\",\n\t\"startTime\": \"Start Time\",\n\t\"temperature\": \"Temperature(°C)\",\n\t\"trackerId\": \"Tracker Id\",\n\t\"transferTime\": \"Transfer Time\",\n\t\"tripName\": \"Active Trip\",\n\t\"trips\": \"Trips\",\n\t\"units\": \"Units\",\n\t\"vehicleNumber\": \"Vehicle No.\",\n\t\"volume\": \"Cc\",\n\t\"weight\": \"Kg\",\n\t\"yes\": \"YES\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "DynamicLabels call3",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Pass\"] = responseCode.code === 200;"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": {
+									"raw": "{{url}}/LoginApp/framework/label?labels=or,noDataAvailable,fetchingData,fetchingColumns,of,perPage,downloadExcel,download,downloadEpod,downloadDbReport,downloadOdometerProofs,selectDate,save,reset,more,downloadDeliveryBoyReport,downloadAllOrdersReport,selectDeliveryBoy,starttrip_tooltip,endtrip_tooltip,drsbtn_tooltip,print,edit,cashbtn_tooltip,noDataTemplate_db,noDataTemplate_order,noDataTemplate_trips,noDataTemplate_noStartedTrips,changeDateRange,addDeliveryBoy,planTrip,startTrip,addOrder,selectAll,orders,downloadReport,notifyDeliveryBoys,downloadCustomFormReport,overrideStatus,downloadDbListView",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"LoginApp",
+										"framework",
+										"label"
+									],
+									"query": [
+										{
+											"key": "labels",
+											"value": "or,noDataAvailable,fetchingData,fetchingColumns,of,perPage,downloadExcel,download,downloadEpod,downloadDbReport,downloadOdometerProofs,selectDate,save,reset,more,downloadDeliveryBoyReport,downloadAllOrdersReport,selectDeliveryBoy,starttrip_tooltip,endtrip_tooltip,drsbtn_tooltip,print,edit,cashbtn_tooltip,noDataTemplate_db,noDataTemplate_order,noDataTemplate_trips,noDataTemplate_noStartedTrips,changeDateRange,addDeliveryBoy,planTrip,startTrip,addOrder,selectAll,orders,downloadReport,notifyDeliveryBoys,downloadCustomFormReport,overrideStatus,downloadDbListView",
+											"equals": true,
+											"description": ""
+										}
+									],
+									"variable": []
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "CLIENT_SECRET_KEY",
+										"value": "{{CLIENT_SECRET_KEY}}",
+										"description": ""
+									},
+									{
+										"key": "WWW-Authenticate",
+										"value": "{{WWW-Authenticate}}",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"address\": \"Address\",\n\t\"areYouSureChangeDrsOrder\": \"Are you sure you want to change the DRS Order ?\",\n\t\"avgDetentionMins\": \"Avg Detention in mins\",\n\t\"batteryPercentage\": \"Battery\",\n\t\"capacity\": \"Capacity\",\n\t\"contactNo\": \"Contact No.\",\n\t\"createdOn\": \"Created On\",\n\t\"currentLocation\": \"Current Location \",\n\t\"customerName\": \"Customer name\",\n\t\"deliveryBoy\": \"Delivery Associate\",\n\t\"deliveryBoyName\": \"Delivery Associate Name\",\n\t\"direction\": \"Direction\",\n\t\"distance\": \"Mile\",\n\t\"distanceInKms\": \"Distance in Kms\",\n\t\"dropMarkerOrderAllocation\": \"Drop the marker and click on the path where you want the Order to be allocated\",\n\t\"endDate\": \"End Date\",\n\t\"endTime\": \"End Time\",\n\t\"eta\": \"ETA\",\n\t\"fetching\": \"Fetching\",\n\t\"fuel\": \"Fuel\",\n\t\"geofenceName\": \"Geofence Name\",\n\t\"highAlert\": \"High Alert\",\n\t\"hub\": \"Hub List\",\n\t\"ignition\": \"Ignition\",\n\t\"invalid\": \"Invalid\",\n\t\"invalidTemperatureMsg\": \"Sensor not connected\",\n\t\"isManuallyAssignedFlFalse\": \"Planning\",\n\t\"isManuallyAssignedFlTrue\": \"Manually \",\n\t\"lastLocation\": \"Last Location\",\n\t\"lastTrackedDate\": \"Last Tracked Date\",\n\t\"latitude\": \"Latitude\",\n\t\"location\": \"Location\",\n\t\"locationNotFound\": \"Location Not Found\",\n\t\"locationType\": \"Location Type\",\n\t\"longitude\": \"Longitude\",\n\t\"lowAlert\": \"Low Alert\",\n\t\"maxDetentionMins\": \"Max Detention in mins\",\n\t\"name\": \"Name\",\n\t\"no\": \"NO\",\n\t\"noDataChangesMessage\": \"You have not made any changes\",\n\t\"notAvailable\": \"Not Available\",\n\t\"odometer\": \"Mileage\",\n\t\"or\": \"OR\",\n\t\"orderNumber\": \"Order Number\",\n\t\"phoneNumber\": \"Phone Number\",\n\t\"position\": \"Position\",\n\t\"radius\": \"Radius\",\n\t\"speed\": \"Kmph\",\n\t\"speed_label\": \"Speed\",\n\t\"startDate\": \"Start Date\",\n\t\"startTime\": \"Start Time\",\n\t\"temperature\": \"Temperature(°C)\",\n\t\"trackerId\": \"Tracker Id\",\n\t\"transferTime\": \"Transfer Time\",\n\t\"tripName\": \"Active Trip\",\n\t\"trips\": \"Trips\",\n\t\"units\": \"Units\",\n\t\"vehicleNumber\": \"Vehicle No.\",\n\t\"volume\": \"Cc\",\n\t\"weight\": \"Kg\",\n\t\"yes\": \"YES\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "UserAccess call",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Pass\"] = responseCode.code === 200;"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": {
+									"raw": "{{url}}/LoginApp/framework/label?labels=or,noDataAvailable,fetchingData,fetchingColumns,of,perPage,downloadExcel,download,downloadEpod,downloadDbReport,downloadOdometerProofs,selectDate,save,reset,more,downloadDeliveryBoyReport,downloadAllOrdersReport,selectDeliveryBoy,starttrip_tooltip,endtrip_tooltip,drsbtn_tooltip,print,edit,cashbtn_tooltip,noDataTemplate_db,noDataTemplate_order,noDataTemplate_trips,noDataTemplate_noStartedTrips,changeDateRange,addDeliveryBoy,planTrip,startTrip,addOrder,selectAll,orders,downloadReport,notifyDeliveryBoys,downloadCustomFormReport,overrideStatus,downloadDbListView",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"LoginApp",
+										"framework",
+										"label"
+									],
+									"query": [
+										{
+											"key": "labels",
+											"value": "or,noDataAvailable,fetchingData,fetchingColumns,of,perPage,downloadExcel,download,downloadEpod,downloadDbReport,downloadOdometerProofs,selectDate,save,reset,more,downloadDeliveryBoyReport,downloadAllOrdersReport,selectDeliveryBoy,starttrip_tooltip,endtrip_tooltip,drsbtn_tooltip,print,edit,cashbtn_tooltip,noDataTemplate_db,noDataTemplate_order,noDataTemplate_trips,noDataTemplate_noStartedTrips,changeDateRange,addDeliveryBoy,planTrip,startTrip,addOrder,selectAll,orders,downloadReport,notifyDeliveryBoys,downloadCustomFormReport,overrideStatus,downloadDbListView",
+											"equals": true,
+											"description": ""
+										}
+									],
+									"variable": []
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "CLIENT_SECRET_KEY",
+										"value": "{{CLIENT_SECRET_KEY}}",
+										"description": ""
+									},
+									{
+										"key": "WWW-Authenticate",
+										"value": "{{WWW-Authenticate}}",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"address\": \"Address\",\n\t\"areYouSureChangeDrsOrder\": \"Are you sure you want to change the DRS Order ?\",\n\t\"avgDetentionMins\": \"Avg Detention in mins\",\n\t\"batteryPercentage\": \"Battery\",\n\t\"capacity\": \"Capacity\",\n\t\"contactNo\": \"Contact No.\",\n\t\"createdOn\": \"Created On\",\n\t\"currentLocation\": \"Current Location \",\n\t\"customerName\": \"Customer name\",\n\t\"deliveryBoy\": \"Delivery Associate\",\n\t\"deliveryBoyName\": \"Delivery Associate Name\",\n\t\"direction\": \"Direction\",\n\t\"distance\": \"Mile\",\n\t\"distanceInKms\": \"Distance in Kms\",\n\t\"dropMarkerOrderAllocation\": \"Drop the marker and click on the path where you want the Order to be allocated\",\n\t\"endDate\": \"End Date\",\n\t\"endTime\": \"End Time\",\n\t\"eta\": \"ETA\",\n\t\"fetching\": \"Fetching\",\n\t\"fuel\": \"Fuel\",\n\t\"geofenceName\": \"Geofence Name\",\n\t\"highAlert\": \"High Alert\",\n\t\"hub\": \"Hub List\",\n\t\"ignition\": \"Ignition\",\n\t\"invalid\": \"Invalid\",\n\t\"invalidTemperatureMsg\": \"Sensor not connected\",\n\t\"isManuallyAssignedFlFalse\": \"Planning\",\n\t\"isManuallyAssignedFlTrue\": \"Manually \",\n\t\"lastLocation\": \"Last Location\",\n\t\"lastTrackedDate\": \"Last Tracked Date\",\n\t\"latitude\": \"Latitude\",\n\t\"location\": \"Location\",\n\t\"locationNotFound\": \"Location Not Found\",\n\t\"locationType\": \"Location Type\",\n\t\"longitude\": \"Longitude\",\n\t\"lowAlert\": \"Low Alert\",\n\t\"maxDetentionMins\": \"Max Detention in mins\",\n\t\"name\": \"Name\",\n\t\"no\": \"NO\",\n\t\"noDataChangesMessage\": \"You have not made any changes\",\n\t\"notAvailable\": \"Not Available\",\n\t\"odometer\": \"Mileage\",\n\t\"or\": \"OR\",\n\t\"orderNumber\": \"Order Number\",\n\t\"phoneNumber\": \"Phone Number\",\n\t\"position\": \"Position\",\n\t\"radius\": \"Radius\",\n\t\"speed\": \"Kmph\",\n\t\"speed_label\": \"Speed\",\n\t\"startDate\": \"Start Date\",\n\t\"startTime\": \"Start Time\",\n\t\"temperature\": \"Temperature(°C)\",\n\t\"trackerId\": \"Tracker Id\",\n\t\"transferTime\": \"Transfer Time\",\n\t\"tripName\": \"Active Trip\",\n\t\"trips\": \"Trips\",\n\t\"units\": \"Units\",\n\t\"vehicleNumber\": \"Vehicle No.\",\n\t\"volume\": \"Cc\",\n\t\"weight\": \"Kg\",\n\t\"yes\": \"YES\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "AlertLabels",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Pass\"] = responseCode.code === 200;"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": {
+									"raw": "{{url}}/LoginApp/framework/label?labels=highAlerts,lowAlerts",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"LoginApp",
+										"framework",
+										"label"
+									],
+									"query": [
+										{
+											"key": "labels",
+											"value": "highAlerts,lowAlerts",
+											"equals": true,
+											"description": ""
+										}
+									],
+									"variable": []
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "CLIENT_SECRET_KEY",
+										"value": "{{CLIENT_SECRET_KEY}}",
+										"description": ""
+									},
+									{
+										"key": "WWW-Authenticate",
+										"value": "{{WWW-Authenticate}}",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"address\": \"Address\",\n\t\"areYouSureChangeDrsOrder\": \"Are you sure you want to change the DRS Order ?\",\n\t\"avgDetentionMins\": \"Avg Detention in mins\",\n\t\"batteryPercentage\": \"Battery\",\n\t\"capacity\": \"Capacity\",\n\t\"contactNo\": \"Contact No.\",\n\t\"createdOn\": \"Created On\",\n\t\"currentLocation\": \"Current Location \",\n\t\"customerName\": \"Customer name\",\n\t\"deliveryBoy\": \"Delivery Associate\",\n\t\"deliveryBoyName\": \"Delivery Associate Name\",\n\t\"direction\": \"Direction\",\n\t\"distance\": \"Mile\",\n\t\"distanceInKms\": \"Distance in Kms\",\n\t\"dropMarkerOrderAllocation\": \"Drop the marker and click on the path where you want the Order to be allocated\",\n\t\"endDate\": \"End Date\",\n\t\"endTime\": \"End Time\",\n\t\"eta\": \"ETA\",\n\t\"fetching\": \"Fetching\",\n\t\"fuel\": \"Fuel\",\n\t\"geofenceName\": \"Geofence Name\",\n\t\"highAlert\": \"High Alert\",\n\t\"hub\": \"Hub List\",\n\t\"ignition\": \"Ignition\",\n\t\"invalid\": \"Invalid\",\n\t\"invalidTemperatureMsg\": \"Sensor not connected\",\n\t\"isManuallyAssignedFlFalse\": \"Planning\",\n\t\"isManuallyAssignedFlTrue\": \"Manually \",\n\t\"lastLocation\": \"Last Location\",\n\t\"lastTrackedDate\": \"Last Tracked Date\",\n\t\"latitude\": \"Latitude\",\n\t\"location\": \"Location\",\n\t\"locationNotFound\": \"Location Not Found\",\n\t\"locationType\": \"Location Type\",\n\t\"longitude\": \"Longitude\",\n\t\"lowAlert\": \"Low Alert\",\n\t\"maxDetentionMins\": \"Max Detention in mins\",\n\t\"name\": \"Name\",\n\t\"no\": \"NO\",\n\t\"noDataChangesMessage\": \"You have not made any changes\",\n\t\"notAvailable\": \"Not Available\",\n\t\"odometer\": \"Mileage\",\n\t\"or\": \"OR\",\n\t\"orderNumber\": \"Order Number\",\n\t\"phoneNumber\": \"Phone Number\",\n\t\"position\": \"Position\",\n\t\"radius\": \"Radius\",\n\t\"speed\": \"Kmph\",\n\t\"speed_label\": \"Speed\",\n\t\"startDate\": \"Start Date\",\n\t\"startTime\": \"Start Time\",\n\t\"temperature\": \"Temperature(°C)\",\n\t\"trackerId\": \"Tracker Id\",\n\t\"transferTime\": \"Transfer Time\",\n\t\"tripName\": \"Active Trip\",\n\t\"trips\": \"Trips\",\n\t\"units\": \"Units\",\n\t\"vehicleNumber\": \"Vehicle No.\",\n\t\"volume\": \"Cc\",\n\t\"weight\": \"Kg\",\n\t\"yes\": \"YES\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "AlertTickers for High alerts",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Pass\"] = responseCode.code === 200;"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": {
+									"raw": "{{url}}/LoginApp/framework/label?labels=highAlerts,lowAlerts",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"LoginApp",
+										"framework",
+										"label"
+									],
+									"query": [
+										{
+											"key": "labels",
+											"value": "highAlerts,lowAlerts",
+											"equals": true,
+											"description": ""
+										}
+									],
+									"variable": []
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "CLIENT_SECRET_KEY",
+										"value": "{{CLIENT_SECRET_KEY}}",
+										"description": ""
+									},
+									{
+										"key": "WWW-Authenticate",
+										"value": "{{WWW-Authenticate}}",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"address\": \"Address\",\n\t\"areYouSureChangeDrsOrder\": \"Are you sure you want to change the DRS Order ?\",\n\t\"avgDetentionMins\": \"Avg Detention in mins\",\n\t\"batteryPercentage\": \"Battery\",\n\t\"capacity\": \"Capacity\",\n\t\"contactNo\": \"Contact No.\",\n\t\"createdOn\": \"Created On\",\n\t\"currentLocation\": \"Current Location \",\n\t\"customerName\": \"Customer name\",\n\t\"deliveryBoy\": \"Delivery Associate\",\n\t\"deliveryBoyName\": \"Delivery Associate Name\",\n\t\"direction\": \"Direction\",\n\t\"distance\": \"Mile\",\n\t\"distanceInKms\": \"Distance in Kms\",\n\t\"dropMarkerOrderAllocation\": \"Drop the marker and click on the path where you want the Order to be allocated\",\n\t\"endDate\": \"End Date\",\n\t\"endTime\": \"End Time\",\n\t\"eta\": \"ETA\",\n\t\"fetching\": \"Fetching\",\n\t\"fuel\": \"Fuel\",\n\t\"geofenceName\": \"Geofence Name\",\n\t\"highAlert\": \"High Alert\",\n\t\"hub\": \"Hub List\",\n\t\"ignition\": \"Ignition\",\n\t\"invalid\": \"Invalid\",\n\t\"invalidTemperatureMsg\": \"Sensor not connected\",\n\t\"isManuallyAssignedFlFalse\": \"Planning\",\n\t\"isManuallyAssignedFlTrue\": \"Manually \",\n\t\"lastLocation\": \"Last Location\",\n\t\"lastTrackedDate\": \"Last Tracked Date\",\n\t\"latitude\": \"Latitude\",\n\t\"location\": \"Location\",\n\t\"locationNotFound\": \"Location Not Found\",\n\t\"locationType\": \"Location Type\",\n\t\"longitude\": \"Longitude\",\n\t\"lowAlert\": \"Low Alert\",\n\t\"maxDetentionMins\": \"Max Detention in mins\",\n\t\"name\": \"Name\",\n\t\"no\": \"NO\",\n\t\"noDataChangesMessage\": \"You have not made any changes\",\n\t\"notAvailable\": \"Not Available\",\n\t\"odometer\": \"Mileage\",\n\t\"or\": \"OR\",\n\t\"orderNumber\": \"Order Number\",\n\t\"phoneNumber\": \"Phone Number\",\n\t\"position\": \"Position\",\n\t\"radius\": \"Radius\",\n\t\"speed\": \"Kmph\",\n\t\"speed_label\": \"Speed\",\n\t\"startDate\": \"Start Date\",\n\t\"startTime\": \"Start Time\",\n\t\"temperature\": \"Temperature(°C)\",\n\t\"trackerId\": \"Tracker Id\",\n\t\"transferTime\": \"Transfer Time\",\n\t\"tripName\": \"Active Trip\",\n\t\"trips\": \"Trips\",\n\t\"units\": \"Units\",\n\t\"vehicleNumber\": \"Vehicle No.\",\n\t\"volume\": \"Cc\",\n\t\"weight\": \"Kg\",\n\t\"yes\": \"YES\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "AlertTickers for Low alerts",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Pass\"] = responseCode.code === 200;"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": {
+									"raw": "{{url}}/LoginApp/framework/label?labels=highAlerts,lowAlerts",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"LoginApp",
+										"framework",
+										"label"
+									],
+									"query": [
+										{
+											"key": "labels",
+											"value": "highAlerts,lowAlerts",
+											"equals": true,
+											"description": ""
+										}
+									],
+									"variable": []
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "CLIENT_SECRET_KEY",
+										"value": "{{CLIENT_SECRET_KEY}}",
+										"description": ""
+									},
+									{
+										"key": "WWW-Authenticate",
+										"value": "{{WWW-Authenticate}}",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"address\": \"Address\",\n\t\"areYouSureChangeDrsOrder\": \"Are you sure you want to change the DRS Order ?\",\n\t\"avgDetentionMins\": \"Avg Detention in mins\",\n\t\"batteryPercentage\": \"Battery\",\n\t\"capacity\": \"Capacity\",\n\t\"contactNo\": \"Contact No.\",\n\t\"createdOn\": \"Created On\",\n\t\"currentLocation\": \"Current Location \",\n\t\"customerName\": \"Customer name\",\n\t\"deliveryBoy\": \"Delivery Associate\",\n\t\"deliveryBoyName\": \"Delivery Associate Name\",\n\t\"direction\": \"Direction\",\n\t\"distance\": \"Mile\",\n\t\"distanceInKms\": \"Distance in Kms\",\n\t\"dropMarkerOrderAllocation\": \"Drop the marker and click on the path where you want the Order to be allocated\",\n\t\"endDate\": \"End Date\",\n\t\"endTime\": \"End Time\",\n\t\"eta\": \"ETA\",\n\t\"fetching\": \"Fetching\",\n\t\"fuel\": \"Fuel\",\n\t\"geofenceName\": \"Geofence Name\",\n\t\"highAlert\": \"High Alert\",\n\t\"hub\": \"Hub List\",\n\t\"ignition\": \"Ignition\",\n\t\"invalid\": \"Invalid\",\n\t\"invalidTemperatureMsg\": \"Sensor not connected\",\n\t\"isManuallyAssignedFlFalse\": \"Planning\",\n\t\"isManuallyAssignedFlTrue\": \"Manually \",\n\t\"lastLocation\": \"Last Location\",\n\t\"lastTrackedDate\": \"Last Tracked Date\",\n\t\"latitude\": \"Latitude\",\n\t\"location\": \"Location\",\n\t\"locationNotFound\": \"Location Not Found\",\n\t\"locationType\": \"Location Type\",\n\t\"longitude\": \"Longitude\",\n\t\"lowAlert\": \"Low Alert\",\n\t\"maxDetentionMins\": \"Max Detention in mins\",\n\t\"name\": \"Name\",\n\t\"no\": \"NO\",\n\t\"noDataChangesMessage\": \"You have not made any changes\",\n\t\"notAvailable\": \"Not Available\",\n\t\"odometer\": \"Mileage\",\n\t\"or\": \"OR\",\n\t\"orderNumber\": \"Order Number\",\n\t\"phoneNumber\": \"Phone Number\",\n\t\"position\": \"Position\",\n\t\"radius\": \"Radius\",\n\t\"speed\": \"Kmph\",\n\t\"speed_label\": \"Speed\",\n\t\"startDate\": \"Start Date\",\n\t\"startTime\": \"Start Time\",\n\t\"temperature\": \"Temperature(°C)\",\n\t\"trackerId\": \"Tracker Id\",\n\t\"transferTime\": \"Transfer Time\",\n\t\"tripName\": \"Active Trip\",\n\t\"trips\": \"Trips\",\n\t\"units\": \"Units\",\n\t\"vehicleNumber\": \"Vehicle No.\",\n\t\"volume\": \"Cc\",\n\t\"weight\": \"Kg\",\n\t\"yes\": \"YES\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "ClientProperties Call1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Pass\"] = responseCode.code === 200;"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": {
+									"raw": "{{url}}/LoginApp/framework/label?labels=highAlerts,lowAlerts",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"LoginApp",
+										"framework",
+										"label"
+									],
+									"query": [
+										{
+											"key": "labels",
+											"value": "highAlerts,lowAlerts",
+											"equals": true,
+											"description": ""
+										}
+									],
+									"variable": []
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "CLIENT_SECRET_KEY",
+										"value": "{{CLIENT_SECRET_KEY}}",
+										"description": ""
+									},
+									{
+										"key": "WWW-Authenticate",
+										"value": "{{WWW-Authenticate}}",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"address\": \"Address\",\n\t\"areYouSureChangeDrsOrder\": \"Are you sure you want to change the DRS Order ?\",\n\t\"avgDetentionMins\": \"Avg Detention in mins\",\n\t\"batteryPercentage\": \"Battery\",\n\t\"capacity\": \"Capacity\",\n\t\"contactNo\": \"Contact No.\",\n\t\"createdOn\": \"Created On\",\n\t\"currentLocation\": \"Current Location \",\n\t\"customerName\": \"Customer name\",\n\t\"deliveryBoy\": \"Delivery Associate\",\n\t\"deliveryBoyName\": \"Delivery Associate Name\",\n\t\"direction\": \"Direction\",\n\t\"distance\": \"Mile\",\n\t\"distanceInKms\": \"Distance in Kms\",\n\t\"dropMarkerOrderAllocation\": \"Drop the marker and click on the path where you want the Order to be allocated\",\n\t\"endDate\": \"End Date\",\n\t\"endTime\": \"End Time\",\n\t\"eta\": \"ETA\",\n\t\"fetching\": \"Fetching\",\n\t\"fuel\": \"Fuel\",\n\t\"geofenceName\": \"Geofence Name\",\n\t\"highAlert\": \"High Alert\",\n\t\"hub\": \"Hub List\",\n\t\"ignition\": \"Ignition\",\n\t\"invalid\": \"Invalid\",\n\t\"invalidTemperatureMsg\": \"Sensor not connected\",\n\t\"isManuallyAssignedFlFalse\": \"Planning\",\n\t\"isManuallyAssignedFlTrue\": \"Manually \",\n\t\"lastLocation\": \"Last Location\",\n\t\"lastTrackedDate\": \"Last Tracked Date\",\n\t\"latitude\": \"Latitude\",\n\t\"location\": \"Location\",\n\t\"locationNotFound\": \"Location Not Found\",\n\t\"locationType\": \"Location Type\",\n\t\"longitude\": \"Longitude\",\n\t\"lowAlert\": \"Low Alert\",\n\t\"maxDetentionMins\": \"Max Detention in mins\",\n\t\"name\": \"Name\",\n\t\"no\": \"NO\",\n\t\"noDataChangesMessage\": \"You have not made any changes\",\n\t\"notAvailable\": \"Not Available\",\n\t\"odometer\": \"Mileage\",\n\t\"or\": \"OR\",\n\t\"orderNumber\": \"Order Number\",\n\t\"phoneNumber\": \"Phone Number\",\n\t\"position\": \"Position\",\n\t\"radius\": \"Radius\",\n\t\"speed\": \"Kmph\",\n\t\"speed_label\": \"Speed\",\n\t\"startDate\": \"Start Date\",\n\t\"startTime\": \"Start Time\",\n\t\"temperature\": \"Temperature(°C)\",\n\t\"trackerId\": \"Tracker Id\",\n\t\"transferTime\": \"Transfer Time\",\n\t\"tripName\": \"Active Trip\",\n\t\"trips\": \"Trips\",\n\t\"units\": \"Units\",\n\t\"vehicleNumber\": \"Vehicle No.\",\n\t\"volume\": \"Cc\",\n\t\"weight\": \"Kg\",\n\t\"yes\": \"YES\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "ClientProperties Call2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Pass\"] = responseCode.code === 200;"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": {
+									"raw": "{{url}}/LoginApp/framework/label?labels=highAlerts,lowAlerts",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"LoginApp",
+										"framework",
+										"label"
+									],
+									"query": [
+										{
+											"key": "labels",
+											"value": "highAlerts,lowAlerts",
+											"equals": true,
+											"description": ""
+										}
+									],
+									"variable": []
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "CLIENT_SECRET_KEY",
+										"value": "{{CLIENT_SECRET_KEY}}",
+										"description": ""
+									},
+									{
+										"key": "WWW-Authenticate",
+										"value": "{{WWW-Authenticate}}",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"address\": \"Address\",\n\t\"areYouSureChangeDrsOrder\": \"Are you sure you want to change the DRS Order ?\",\n\t\"avgDetentionMins\": \"Avg Detention in mins\",\n\t\"batteryPercentage\": \"Battery\",\n\t\"capacity\": \"Capacity\",\n\t\"contactNo\": \"Contact No.\",\n\t\"createdOn\": \"Created On\",\n\t\"currentLocation\": \"Current Location \",\n\t\"customerName\": \"Customer name\",\n\t\"deliveryBoy\": \"Delivery Associate\",\n\t\"deliveryBoyName\": \"Delivery Associate Name\",\n\t\"direction\": \"Direction\",\n\t\"distance\": \"Mile\",\n\t\"distanceInKms\": \"Distance in Kms\",\n\t\"dropMarkerOrderAllocation\": \"Drop the marker and click on the path where you want the Order to be allocated\",\n\t\"endDate\": \"End Date\",\n\t\"endTime\": \"End Time\",\n\t\"eta\": \"ETA\",\n\t\"fetching\": \"Fetching\",\n\t\"fuel\": \"Fuel\",\n\t\"geofenceName\": \"Geofence Name\",\n\t\"highAlert\": \"High Alert\",\n\t\"hub\": \"Hub List\",\n\t\"ignition\": \"Ignition\",\n\t\"invalid\": \"Invalid\",\n\t\"invalidTemperatureMsg\": \"Sensor not connected\",\n\t\"isManuallyAssignedFlFalse\": \"Planning\",\n\t\"isManuallyAssignedFlTrue\": \"Manually \",\n\t\"lastLocation\": \"Last Location\",\n\t\"lastTrackedDate\": \"Last Tracked Date\",\n\t\"latitude\": \"Latitude\",\n\t\"location\": \"Location\",\n\t\"locationNotFound\": \"Location Not Found\",\n\t\"locationType\": \"Location Type\",\n\t\"longitude\": \"Longitude\",\n\t\"lowAlert\": \"Low Alert\",\n\t\"maxDetentionMins\": \"Max Detention in mins\",\n\t\"name\": \"Name\",\n\t\"no\": \"NO\",\n\t\"noDataChangesMessage\": \"You have not made any changes\",\n\t\"notAvailable\": \"Not Available\",\n\t\"odometer\": \"Mileage\",\n\t\"or\": \"OR\",\n\t\"orderNumber\": \"Order Number\",\n\t\"phoneNumber\": \"Phone Number\",\n\t\"position\": \"Position\",\n\t\"radius\": \"Radius\",\n\t\"speed\": \"Kmph\",\n\t\"speed_label\": \"Speed\",\n\t\"startDate\": \"Start Date\",\n\t\"startTime\": \"Start Time\",\n\t\"temperature\": \"Temperature(°C)\",\n\t\"trackerId\": \"Tracker Id\",\n\t\"transferTime\": \"Transfer Time\",\n\t\"tripName\": \"Active Trip\",\n\t\"trips\": \"Trips\",\n\t\"units\": \"Units\",\n\t\"vehicleNumber\": \"Vehicle No.\",\n\t\"volume\": \"Cc\",\n\t\"weight\": \"Kg\",\n\t\"yes\": \"YES\"\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Delivered Shipments call",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Pass\"] = responseCode.code === 200;"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/ReportingApp/dashboard/FMLM/DeliverShipments",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "CLIENT_SECRET_KEY",
+										"value": "{{CLIENT_SECRET_KEY}}",
+										"description": ""
+									},
+									{
+										"key": "WWW-Authenticate",
+										"value": "{{WWW-Authenticate}}",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Resources call",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Pass\"] = responseCode.code === 200;"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": "{{url}}/ReportingApp/dashboard/FMLM/resources",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "CLIENT_SECRET_KEY",
+										"value": "{{CLIENT_SECRET_KEY}}",
+										"description": ""
+									},
+									{
+										"key": "WWW-Authenticate",
+										"value": "{{WWW-Authenticate}}",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "Labels call",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Pass\"] = responseCode.code === 200;"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": {
+									"raw": "{{url}}/LoginApp/framework/label?labels=weight,distance,volume,speed",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"LoginApp",
+										"framework",
+										"label"
+									],
+									"query": [
+										{
+											"key": "labels",
+											"value": "weight,distance,volume,speed",
+											"equals": true,
+											"description": ""
+										}
+									],
+									"variable": []
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "CLIENT_SECRET_KEY",
+										"value": "{{CLIENT_SECRET_KEY}}",
+										"description": ""
+									},
+									{
+										"key": "WWW-Authenticate",
+										"value": "{{WWW-Authenticate}}",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "RESOURCES",
+					"description": "",
+					"item": [
+						{
+							"name": "Delivery Boy",
+							"description": "",
+							"item": [
+								{
+									"name": "Get Resources Labels1",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"tests[\"Pass\"] = responseCode.code === 200;",
+													"",
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"url": {
+											"raw": "{{url}}/LoginApp/framework/label?labels=Resources",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"LoginApp",
+												"framework",
+												"label"
+											],
+											"query": [
+												{
+													"key": "labels",
+													"value": "Resources",
+													"equals": true,
+													"description": ""
+												}
+											],
+											"variable": []
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											},
+											{
+												"key": "CLIENT_SECRET_KEY",
+												"value": "{{CLIENT_SECRET_KEY}}",
+												"description": ""
+											},
+											{
+												"key": "WWW-Authenticate",
+												"value": "{{WWW-Authenticate}}",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n        \"userName\":\"sameer.shirke@pispl.in\",\n        \"password\":\"admin\"\n}  "
+										},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "Get Resources Labels2",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"tests[\"Pass\"] = responseCode.code === 200;",
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"url": {
+											"raw": "{{url}}/LoginApp/framework/label?labels=invalidDeliveryBoys,areYouSureYouWantToDeleteDeliveryBoys,delete_Confirmation_Warning,delete_Confirmation_Warning_2,cancelLabel,deleteLabel,pleaseSelectAtLeastOneRow,youCantMarkInactiveDeliveryBoy,areYouSureYouWantToMarkAsPresent,deliveryMediumAlreadyAbsent,deliveryMediumAlreadyPresent,areYouSureYouWantToMarkAsAcitve,areYouSureYouWantToMarkAsInactive,statusConfirmation,ok,someProblemOccured,youCanChangeOnlyOneDeliveryMediumPasswordAtATime,deliveryBoyAlreadyActive,deliveryBoyAlreadyInActive,pleaseSelectAtLeastOneRow,phoneNumberIsInvalid,phoneNumberIsNotValidForYourRegion,phoneNumberIsMandatory,pleaseEnterProperData,failedToUpdateDeliveryBoy,somethingWendWrong,deletionConformation,changePassword,DeliveryBoyPerformanceReport,DeliveryBoyReport,onlineWeak,onlineStrong,active,areYouSureYouWantToMarkAsAbsent,notify,deliveryboy_p,message,notify,DBNotifyErrorPrompt,advancedFilterApplied,dashBoardStatus_available,dashBoardStatus_busy,dashBoardStatus_Absent,dashBoardStatus_Available,dashBoardStatus_Inactive,dashBoardStatus_Intransit,max200AllowedOdometer,selectDmOdometer,reason,selectReason,ACTIVEREASON1,ACTIVEREASON2,ACTIVEREASON3,ACTIVEREASON4,ACTIVEREASON5,INACTIVEREASON1,INACTIVEREASON2,INACTIVEREASON3,INACTIVEREASON4,INACTIVEREASON5,Select,sameAddress,Current%20Address,Permanent%20Address,DeliveryBoyList",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"LoginApp",
+												"framework",
+												"label"
+											],
+											"query": [
+												{
+													"key": "labels",
+													"value": "invalidDeliveryBoys,areYouSureYouWantToDeleteDeliveryBoys,delete_Confirmation_Warning,delete_Confirmation_Warning_2,cancelLabel,deleteLabel,pleaseSelectAtLeastOneRow,youCantMarkInactiveDeliveryBoy,areYouSureYouWantToMarkAsPresent,deliveryMediumAlreadyAbsent,deliveryMediumAlreadyPresent,areYouSureYouWantToMarkAsAcitve,areYouSureYouWantToMarkAsInactive,statusConfirmation,ok,someProblemOccured,youCanChangeOnlyOneDeliveryMediumPasswordAtATime,deliveryBoyAlreadyActive,deliveryBoyAlreadyInActive,pleaseSelectAtLeastOneRow,phoneNumberIsInvalid,phoneNumberIsNotValidForYourRegion,phoneNumberIsMandatory,pleaseEnterProperData,failedToUpdateDeliveryBoy,somethingWendWrong,deletionConformation,changePassword,DeliveryBoyPerformanceReport,DeliveryBoyReport,onlineWeak,onlineStrong,active,areYouSureYouWantToMarkAsAbsent,notify,deliveryboy_p,message,notify,DBNotifyErrorPrompt,advancedFilterApplied,dashBoardStatus_available,dashBoardStatus_busy,dashBoardStatus_Absent,dashBoardStatus_Available,dashBoardStatus_Inactive,dashBoardStatus_Intransit,max200AllowedOdometer,selectDmOdometer,reason,selectReason,ACTIVEREASON1,ACTIVEREASON2,ACTIVEREASON3,ACTIVEREASON4,ACTIVEREASON5,INACTIVEREASON1,INACTIVEREASON2,INACTIVEREASON3,INACTIVEREASON4,INACTIVEREASON5,Select,sameAddress,Current%20Address,Permanent%20Address,DeliveryBoyList",
+													"equals": true,
+													"description": ""
+												}
+											],
+											"variable": []
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											},
+											{
+												"key": "CLIENT_SECRET_KEY",
+												"value": "{{CLIENT_SECRET_KEY}}",
+												"description": ""
+											},
+											{
+												"key": "WWW-Authenticate",
+												"value": "{{WWW-Authenticate}}",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n        \"userName\":\"sameer.shirke@pispl.in\",\n        \"password\":\"admin\"\n}  "
+										},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "Get branch",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"tests[\"Pass\"] = responseCode.code === 200;",
+													"",
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"url": "{{url}}/LookupApp/lookup/branches/hierarchy",
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											},
+											{
+												"key": "CLIENT_SECRET_KEY",
+												"value": "{{CLIENT_SECRET_KEY}}",
+												"description": ""
+											},
+											{
+												"key": "WWW-Authenticate",
+												"value": "{{WWW-Authenticate}}",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n        \"userName\":\"sameer.shirke@pispl.in\",\n        \"password\":\"admin\"\n}  "
+										},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "Get Delivery Types",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"tests[\"Pass\"] = responseCode.code === 200;",
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"url": {
+											"raw": "{{url}}/ClientApp/client/getByTypeAndId?type=DELIVERYTYPE",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"ClientApp",
+												"client",
+												"getByTypeAndId"
+											],
+											"query": [
+												{
+													"key": "type",
+													"value": "DELIVERYTYPE",
+													"equals": true,
+													"description": ""
+												}
+											],
+											"variable": []
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											},
+											{
+												"key": "CLIENT_SECRET_KEY",
+												"value": "{{CLIENT_SECRET_KEY}}",
+												"description": ""
+											},
+											{
+												"key": "WWW-Authenticate",
+												"value": "{{WWW-Authenticate}}",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n        \"userName\":\"sameer.shirke@pispl.in\",\n        \"password\":\"admin\"\n}  "
+										},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "DB list view structure",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"tests[\"Pass\"] = responseCode.code === 200;",
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"url": {
+											"raw": "{{url}}/LoginApp/framework/structure?modelName=DELIVERYMEDIUM&pageName=DELIVERYMEDIUM&sectionName=DELIVERY_MEDIUM_LIST_VIEW",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"LoginApp",
+												"framework",
+												"structure"
+											],
+											"query": [
+												{
+													"key": "modelName",
+													"value": "DELIVERYMEDIUM",
+													"equals": true,
+													"description": ""
+												},
+												{
+													"key": "pageName",
+													"value": "DELIVERYMEDIUM",
+													"equals": true,
+													"description": ""
+												},
+												{
+													"key": "sectionName",
+													"value": "DELIVERY_MEDIUM_LIST_VIEW",
+													"equals": true,
+													"description": ""
+												}
+											],
+											"variable": []
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											},
+											{
+												"key": "CLIENT_SECRET_KEY",
+												"value": "{{CLIENT_SECRET_KEY}}",
+												"description": ""
+											},
+											{
+												"key": "WWW-Authenticate",
+												"value": "{{WWW-Authenticate}}",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n        \"userName\":\"sameer.shirke@pispl.in\",\n        \"password\":\"admin\"\n}  "
+										},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "DB list view filter operations",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"tests[\"Pass\"] = responseCode.code === 200;",
+													"",
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"url": "{{url}}/LoginApp/framework/filter/operations",
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											},
+											{
+												"key": "CLIENT_SECRET_KEY",
+												"value": "{{CLIENT_SECRET_KEY}}",
+												"description": ""
+											},
+											{
+												"key": "WWW-Authenticate",
+												"value": "{{WWW-Authenticate}}",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n        \"userName\":\"sameer.shirke@pispl.in\",\n        \"password\":\"admin\"\n}  "
+										},
+										"description": ""
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "GeofenceMaster",
+							"description": "",
+							"item": [
+								{
+									"name": "Get labels for geofence",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"tests[\"Pass\"] = responseCode.code === 200;",
+													"",
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"url": {
+											"raw": "{{url}}/LoginApp/framework/label?labels=geofenceMasterForm",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"LoginApp",
+												"framework",
+												"label"
+											],
+											"query": [
+												{
+													"key": "labels",
+													"value": "geofenceMasterForm",
+													"equals": true,
+													"description": ""
+												}
+											],
+											"variable": []
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											},
+											{
+												"key": "CLIENT_SECRET_KEY",
+												"value": "{{CLIENT_SECRET_KEY}}",
+												"description": ""
+											},
+											{
+												"key": "WWW-Authenticate",
+												"value": "{{WWW-Authenticate}}",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n        \"userName\":\"sameer.shirke@pispl.in\",\n        \"password\":\"admin\"\n}  "
+										},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "Get labels for geofence2",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"tests[\"Pass\"] = responseCode.code === 200;",
+													"",
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"url": {
+											"raw": "{{url}}/LoginApp/framework/label?labels=geoShapesCheckbox,plotLocationsHeader,showHeatMapLabel,selectOrders,chooseADateRangeToPlotOrders,uploadLocations,uploadLocationsFile,uploadLocationFileIcon,downloadLocationFileIcon,lblLocations,geofenceSavedSuccessfully,geofenceNameRequired,geofenceCategoryPlaceholder,lblGeofenceName,lblGeofenceCategory,lblGeofenceDeliveryBoys,OK,deleteGeofenceDisclaimer,geofenceDeletedSuccessfully,lblGeofenceArea,lblAreaUnit,deleteGeofenceConfirm,startTime,endTime,xlsFileAllowed,Loginext_Geofence_Location_Format,saveMaster,exit,noChangesMadeToSave,geofenceAlreadyInOriginalState,geofencesCannotOverlap,changesPending,changesPending_message,yesSaveAndProceed,noCancel,areYouSure,yesProceed,areYouSure_message,geofenceDisclaimerNote,openInGeofenceEditor,sureOpenGeofenceEditor,sureOpenGeofenceEditor_warning,leavePage_title,yesLeave,saveGeofence,saveGeofenceMsg,exitConfirmation,exitConfirmation_msg,resetConfirmation,resetConfirmation_msg,noDontReset,yesReset,yesLeave",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"LoginApp",
+												"framework",
+												"label"
+											],
+											"query": [
+												{
+													"key": "labels",
+													"value": "geoShapesCheckbox,plotLocationsHeader,showHeatMapLabel,selectOrders,chooseADateRangeToPlotOrders,uploadLocations,uploadLocationsFile,uploadLocationFileIcon,downloadLocationFileIcon,lblLocations,geofenceSavedSuccessfully,geofenceNameRequired,geofenceCategoryPlaceholder,lblGeofenceName,lblGeofenceCategory,lblGeofenceDeliveryBoys,OK,deleteGeofenceDisclaimer,geofenceDeletedSuccessfully,lblGeofenceArea,lblAreaUnit,deleteGeofenceConfirm,startTime,endTime,xlsFileAllowed,Loginext_Geofence_Location_Format,saveMaster,exit,noChangesMadeToSave,geofenceAlreadyInOriginalState,geofencesCannotOverlap,changesPending,changesPending_message,yesSaveAndProceed,noCancel,areYouSure,yesProceed,areYouSure_message,geofenceDisclaimerNote,openInGeofenceEditor,sureOpenGeofenceEditor,sureOpenGeofenceEditor_warning,leavePage_title,yesLeave,saveGeofence,saveGeofenceMsg,exitConfirmation,exitConfirmation_msg,resetConfirmation,resetConfirmation_msg,noDontReset,yesReset,yesLeave",
+													"equals": true,
+													"description": ""
+												}
+											],
+											"variable": []
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											},
+											{
+												"key": "CLIENT_SECRET_KEY",
+												"value": "{{CLIENT_SECRET_KEY}}",
+												"description": ""
+											},
+											{
+												"key": "WWW-Authenticate",
+												"value": "{{WWW-Authenticate}}",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n        \"userName\":\"sameer.shirke@pispl.in\",\n        \"password\":\"admin\"\n}  "
+										},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "Get Geofence mapping list",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"tests[\"Pass\"] = responseCode.code === 200;",
+													"",
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"url": "{{url}}/GeofenceApp/geofence/mapping/list",
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											},
+											{
+												"key": "CLIENT_SECRET_KEY",
+												"value": "{{CLIENT_SECRET_KEY}}",
+												"description": ""
+											},
+											{
+												"key": "WWW-Authenticate",
+												"value": "{{WWW-Authenticate}}",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n        \"userName\":\"sameer.shirke@pispl.in\",\n        \"password\":\"admin\"\n}  "
+										},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "Add Geofence",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"tests[\"Pass\"] = responseCode.code === 200;",
+													"",
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"url": "{{url}}/GeofenceApp/geofence/add",
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											},
+											{
+												"key": "CLIENT_SECRET_KEY",
+												"value": "{{CLIENT_SECRET_KEY}}",
+												"description": ""
+											},
+											{
+												"key": "WWW-Authenticate",
+												"value": "{{WWW-Authenticate}}",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"geofenceName\": \"Geofence{{random1}}\",\n\t\"shapeTypeCode\": \"Polygon\",\n\t\"radiusInKms\": \"5.516346088628493\",\n\t\"geofenceCategory\": \"Hub\",\n\t\"geofenceId\": null,\n\t\"polygonCoordinates\": [{\n\t\t\"latitude\": 19.092081386726232,\n\t\t\"longitude\": 72.98555096844213\n\t}, {\n\t\t\"latitude\": 19.091108069906937,\n\t\t\"longitude\": 72.99722394207494\n\t}, {\n\t\t\"latitude\": 19.08956697323949,\n\t\t\"longitude\": 73.00932606915013\n\t}, {\n\t\t\"latitude\": 19.080806782845652,\n\t\t\"longitude\": 73.01250180462377\n\t}, {\n\t\t\"latitude\": 19.071640532088153,\n\t\t\"longitude\": 73.00718030193822\n\t}, {\n\t\t\"latitude\": 19.071640532088153,\n\t\t\"longitude\": 72.98924168804662\n\t}, {\n\t\t\"latitude\": 19.07496639850269,\n\t\t\"longitude\": 72.9812594340183\n\t}, {\n\t\t\"latitude\": 19.079914515229973,\n\t\t\"longitude\": 72.98992833355443\n\t}, {\n\t\t\"latitude\": 19.086241399975275,\n\t\t\"longitude\": 72.98452100018041\n\t}, {\n\t\t\"latitude\": 19.092081386726232,\n\t\t\"longitude\": 72.98555096844213\n\t}],\n\t\"deliveryMediumMasterId\": [{\n\t\t\"deliveryMediumMasterId\": {{dm_id}},\n\t\t\"deliveryMediumName\": \"{{dm_name}\"\n\t}]\n}"
+										},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "Geofence Listing",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"tests[\"Pass\"] = responseCode.code === 200;",
+													"var searchJSON = JSON.parse(responseBody);",
+													"postman.setEnvironmentVariable(\"geofence_id\",searchJSON.results[0].geofenceId);",
+													"",
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"url": {
+											"raw": "{{url}}/GeofenceApp/geofence/mapping/list?pageNumber=1&pageSize=50",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"GeofenceApp",
+												"geofence",
+												"mapping",
+												"list"
+											],
+											"query": [
+												{
+													"key": "pageNumber",
+													"value": "1",
+													"equals": true,
+													"description": ""
+												},
+												{
+													"key": "pageSize",
+													"value": "50",
+													"equals": true,
+													"description": ""
+												}
+											],
+											"variable": []
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											},
+											{
+												"key": "CLIENT_SECRET_KEY",
+												"value": "{{CLIENT_SECRET_KEY}}",
+												"description": ""
+											},
+											{
+												"key": "WWW-Authenticate",
+												"value": "{{WWW-Authenticate}}",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"geofenceName\": \"Geofence{{random1}}\",\n\t\"shapeTypeCode\": \"Polygon\",\n\t\"radiusInKms\": \"5.516346088628493\",\n\t\"geofenceCategory\": \"Hub\",\n\t\"geofenceId\": null,\n\t\"polygonCoordinates\": [{\n\t\t\"latitude\": 19.092081386726232,\n\t\t\"longitude\": 72.98555096844213\n\t}, {\n\t\t\"latitude\": 19.091108069906937,\n\t\t\"longitude\": 72.99722394207494\n\t}, {\n\t\t\"latitude\": 19.08956697323949,\n\t\t\"longitude\": 73.00932606915013\n\t}, {\n\t\t\"latitude\": 19.080806782845652,\n\t\t\"longitude\": 73.01250180462377\n\t}, {\n\t\t\"latitude\": 19.071640532088153,\n\t\t\"longitude\": 73.00718030193822\n\t}, {\n\t\t\"latitude\": 19.071640532088153,\n\t\t\"longitude\": 72.98924168804662\n\t}, {\n\t\t\"latitude\": 19.07496639850269,\n\t\t\"longitude\": 72.9812594340183\n\t}, {\n\t\t\"latitude\": 19.079914515229973,\n\t\t\"longitude\": 72.98992833355443\n\t}, {\n\t\t\"latitude\": 19.086241399975275,\n\t\t\"longitude\": 72.98452100018041\n\t}, {\n\t\t\"latitude\": 19.092081386726232,\n\t\t\"longitude\": 72.98555096844213\n\t}],\n\t\"deliveryMediumMasterId\": [{\n\t\t\"deliveryMediumMasterId\": {{dm_id}},\n\t\t\"deliveryMediumName\": \"{{dm_name}\"\n\t}]\n}"
+										},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "Update Geofence",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"tests[\"Pass\"] = responseCode.code === 200;",
+													"",
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"url": "{{url}}/GeofenceApp/geofence/update/mapping/list",
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											},
+											{
+												"key": "CLIENT_SECRET_KEY",
+												"value": "{{CLIENT_SECRET_KEY}}",
+												"description": ""
+											},
+											{
+												"key": "WWW-Authenticate",
+												"value": "{{WWW-Authenticate}}",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "[{\n\t\"geofenceName\": \"Geofence{{random1}}\",\n\t\"deliveryMediumMasterId\": [{\n\t\t\"deliveryMediumMasterId\": {{dm_id}},\n\t\t\"deliveryMediumName\": \"{{dm_name}}\",\n\t\t\"geofenceDMMappingId\": 1296,\n\t\t\"geofenceId\": {{geofence_id}}\n\t}],\n\t\"geofenceCategory\": \"Toll points\",\n\t\"geofenceId\": {{geofence_id}}\n}]"
+										},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "Mark Geofence Inactive",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"tests[\"Pass\"] = responseCode.code === 200;",
+													"",
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"url": "{{url}}/GeofenceApp/geofence/geofenceDMMapping/active",
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											},
+											{
+												"key": "CLIENT_SECRET_KEY",
+												"value": "{{CLIENT_SECRET_KEY}}",
+												"description": ""
+											},
+											{
+												"key": "WWW-Authenticate",
+												"value": "{{WWW-Authenticate}}",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "[{\"geofenceId\":{{geofence_id}},\"isActiveFl\":false}]"
+										},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "Mark Geofence Active",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"tests[\"Pass\"] = responseCode.code === 200;",
+													"",
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"url": "{{url}}/GeofenceApp/geofence/geofenceDMMapping/active",
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											},
+											{
+												"key": "CLIENT_SECRET_KEY",
+												"value": "{{CLIENT_SECRET_KEY}}",
+												"description": ""
+											},
+											{
+												"key": "WWW-Authenticate",
+												"value": "{{WWW-Authenticate}}",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "[{\"geofenceId\":{{geofence_id}},\"isActiveFl\":true}]"
+										},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "Mark Geofence Active copy",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"tests[\"Pass\"] = responseCode.code === 200;",
+													"",
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"url": "{{url}}/GeofenceApp/geofence/geofenceDMMapping/delete",
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											},
+											{
+												"key": "CLIENT_SECRET_KEY",
+												"value": "{{CLIENT_SECRET_KEY}}",
+												"description": ""
+											},
+											{
+												"key": "WWW-Authenticate",
+												"value": "{{WWW-Authenticate}}",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "[{{geofence_id}}]"
+										},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "Geofence map view",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"tests[\"Pass\"] = responseCode.code === 200;",
+													"",
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"url": {
+											"raw": "{{url}}/LoginApp/framework/structure?modelName=GEOFENCEMASTER&pageName=GEOFENCEMASTER&sectionName=GEOFENCEMASTER_MAP_VIEW",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"LoginApp",
+												"framework",
+												"structure"
+											],
+											"query": [
+												{
+													"key": "modelName",
+													"value": "GEOFENCEMASTER",
+													"equals": true,
+													"description": ""
+												},
+												{
+													"key": "pageName",
+													"value": "GEOFENCEMASTER",
+													"equals": true,
+													"description": ""
+												},
+												{
+													"key": "sectionName",
+													"value": "GEOFENCEMASTER_MAP_VIEW",
+													"equals": true,
+													"description": ""
+												}
+											],
+											"variable": []
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											},
+											{
+												"key": "CLIENT_SECRET_KEY",
+												"value": "{{CLIENT_SECRET_KEY}}",
+												"description": ""
+											},
+											{
+												"key": "WWW-Authenticate",
+												"value": "{{WWW-Authenticate}}",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "[{{geofence_id}}]"
+										},
+										"description": ""
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Beat Planning",
+					"description": "",
+					"item": [
+						{
+							"name": "Outlets",
+							"description": "",
+							"item": [
+								{
+									"name": "Get structure for Outlets Listing",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"tests[\"Pass\"] = responseCode.code === 200;",
+													"",
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"url": {
+											"raw": "{{url}}/LoginApp/framework/structure?modelName=OUTLET&pageName=OUTLET&sectionName=OUTLET_LIST_VIEW",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"LoginApp",
+												"framework",
+												"structure"
+											],
+											"query": [
+												{
+													"key": "modelName",
+													"value": "OUTLET",
+													"equals": true,
+													"description": ""
+												},
+												{
+													"key": "pageName",
+													"value": "OUTLET",
+													"equals": true,
+													"description": ""
+												},
+												{
+													"key": "sectionName",
+													"value": "OUTLET_LIST_VIEW",
+													"equals": true,
+													"description": ""
+												}
+											],
+											"variable": []
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											},
+											{
+												"key": "CLIENT_SECRET_KEY",
+												"value": "{{CLIENT_SECRET_KEY}}",
+												"description": ""
+											},
+											{
+												"key": "WWW-Authenticate",
+												"value": "{{WWW-Authenticate}}",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n        \"userName\":\"sameer.shirke@pispl.in\",\n        \"password\":\"admin\"\n}  "
+										},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "Get Labels1 for outlets",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"tests[\"Pass\"] = responseCode.code === 200;",
+													"",
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"url": {
+											"raw": "{{url}}/LoginApp/framework/label?labels=addOutlet",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"LoginApp",
+												"framework",
+												"label"
+											],
+											"query": [
+												{
+													"key": "labels",
+													"value": "addOutlet",
+													"equals": true
+												}
+											],
+											"variable": []
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											},
+											{
+												"key": "CLIENT_SECRET_KEY",
+												"value": "{{CLIENT_SECRET_KEY}}",
+												"description": ""
+											},
+											{
+												"key": "WWW-Authenticate",
+												"value": "{{WWW-Authenticate}}",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n        \"userName\":\"sameer.shirke@pispl.in\",\n        \"password\":\"admin\"\n}  "
+										},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "Get Labels2 for outlets",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"tests[\"Pass\"] = responseCode.code === 200;",
+													"",
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"url": {
+											"raw": "{{url}}/LoginApp/framework/label?labels=outlet%20details,outlet%20address,visit%20schedule,latitude,longitude,address,outlet%20contact",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"LoginApp",
+												"framework",
+												"label"
+											],
+											"query": [
+												{
+													"key": "labels",
+													"value": "outlet%20details,outlet%20address,visit%20schedule,latitude,longitude,address,outlet%20contact",
+													"equals": true,
+													"description": ""
+												}
+											],
+											"variable": []
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											},
+											{
+												"key": "CLIENT_SECRET_KEY",
+												"value": "{{CLIENT_SECRET_KEY}}",
+												"description": ""
+											},
+											{
+												"key": "WWW-Authenticate",
+												"value": "{{WWW-Authenticate}}",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n        \"userName\":\"sameer.shirke@pispl.in\",\n        \"password\":\"admin\"\n}  "
+										},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "Get structure for add outlets",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"tests[\"Pass\"] = responseCode.code === 200;",
+													"",
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"url": {
+											"raw": "{{url}}/LoginApp/framework/structure?modelName=OUTLET&pageName=OUTLET&sectionName=ADD_OUTLET_FORM",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"LoginApp",
+												"framework",
+												"structure"
+											],
+											"query": [
+												{
+													"key": "modelName",
+													"value": "OUTLET",
+													"equals": true,
+													"description": ""
+												},
+												{
+													"key": "pageName",
+													"value": "OUTLET",
+													"equals": true,
+													"description": ""
+												},
+												{
+													"key": "sectionName",
+													"value": "ADD_OUTLET_FORM",
+													"equals": true,
+													"description": ""
+												}
+											],
+											"variable": []
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											},
+											{
+												"key": "CLIENT_SECRET_KEY",
+												"value": "{{CLIENT_SECRET_KEY}}",
+												"description": ""
+											},
+											{
+												"key": "WWW-Authenticate",
+												"value": "{{WWW-Authenticate}}",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n        \"userName\":\"sameer.shirke@pispl.in\",\n        \"password\":\"admin\"\n}  "
+										},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "Get structure for add outlets copy",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"tests[\"Pass\"] = responseCode.code === 200;",
+													"",
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"url": {
+											"raw": "{{url}}/LoginApp/framework/structure?modelName=OUTLET&pageName=OUTLET&sectionName=ADD_OUTLET_FORM",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"LoginApp",
+												"framework",
+												"structure"
+											],
+											"query": [
+												{
+													"key": "modelName",
+													"value": "OUTLET",
+													"equals": true,
+													"description": ""
+												},
+												{
+													"key": "pageName",
+													"value": "OUTLET",
+													"equals": true,
+													"description": ""
+												},
+												{
+													"key": "sectionName",
+													"value": "ADD_OUTLET_FORM",
+													"equals": true,
+													"description": ""
+												}
+											],
+											"variable": []
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											},
+											{
+												"key": "CLIENT_SECRET_KEY",
+												"value": "{{CLIENT_SECRET_KEY}}",
+												"description": ""
+											},
+											{
+												"key": "WWW-Authenticate",
+												"value": "{{WWW-Authenticate}}",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n        \"userName\":\"sameer.shirke@pispl.in\",\n        \"password\":\"admin\"\n}  "
+										},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "Assign now for outlet",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"tests[\"Pass\"] = responseCode.code === 200;",
+													"",
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"url": {
+											"raw": "{{url}}/LoginApp/framework/structure?modelName=OUTLET&pageName=OUTLET&sectionName=OUTLET_ASSIGN_LIST_VIEW",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"LoginApp",
+												"framework",
+												"structure"
+											],
+											"query": [
+												{
+													"key": "modelName",
+													"value": "OUTLET",
+													"equals": true
+												},
+												{
+													"key": "pageName",
+													"value": "OUTLET",
+													"equals": true
+												},
+												{
+													"key": "sectionName",
+													"value": "OUTLET_ASSIGN_LIST_VIEW",
+													"equals": true
+												}
+											],
+											"variable": []
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											},
+											{
+												"key": "CLIENT_SECRET_KEY",
+												"value": "{{CLIENT_SECRET_KEY}}",
+												"description": ""
+											},
+											{
+												"key": "WWW-Authenticate",
+												"value": "{{WWW-Authenticate}}",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "[{\n\t\"accountCode\": \"{{random1}}\",\n\t\"accountName\": \"{{random1}}\",\n\t\"customerType\": \"Platinum\",\n\t\"branchId\": {{branchid}},\n\t\"apartment\": \"dmart india\",\n\t\"streetName\": \"powai\",\n\t\"locality\": \"hiranandani\",\n\t\"city\": \"Mumbai\",\n\t\"state\": \"Maharashtra\",\n\t\"country\": \"INDIA\",\n\t\"customerPhone\": \"{{random2}}\",\n\t\"emailAddress\": \"test@test.com\",\n\t\"pincode\": \"400076\",\n\t\"latitude\": 19.1165314,\n\t\"longitude\": 72.91042440000001,\n\t\"breakStartTime\": \"2018-03-22T09:00:00Z\",\n\t\"breakEndTime\": \"2018-03-22T10:00:00Z\",\n\t\"visitScheduler\": [{\n\t\t\"productLine\": \"Normal\",\n\t\t\"serviceTimeInMins\": 60,\n\t\t\"visitName\": \"visit1({{random1}})\",\n\t\t\"visitDetail\": [{\n\t\t\t\"visitStartTime\": \"2018-03-22T05:00:00Z\",\n\t\t\t\"visitEndTime\": \"2018-03-22T08:30:00Z\",\n\t\t\t\"dayOfWeek\": \"Monday\"\n\t\t}, {\n\t\t\t\"visitStartTime\": \"2018-03-22T05:00:00Z\",\n\t\t\t\"visitEndTime\": \"2018-03-22T08:30:00Z\",\n\t\t\t\"dayOfWeek\": \"Tuesday\"\n\t\t}]\n\t}, {\n\t\t\"productLine\": \"Special\",\n\t\t\"serviceTimeInMins\": 60,\n\t\t\"visitName\": \"visit2({{random1}})\",\n\t\t\"visitDetail\": [{\n\t\t\t\"visitStartTime\": \"2018-03-22T13:00:00Z\",\n\t\t\t\"visitEndTime\": \"2018-03-22T14:00:00Z\",\n\t\t\t\"dayOfWeek\": \"Wednesday\"\n\t\t}, {\n\t\t\t\"visitStartTime\": \"2018-03-22T13:00:00Z\",\n\t\t\t\"visitEndTime\": \"2018-03-22T14:00:00Z\",\n\t\t\t\"dayOfWeek\": \"Thursday\"\n\t\t}, {\n\t\t\t\"visitStartTime\": \"2018-03-22T13:00:00Z\",\n\t\t\t\"visitEndTime\": \"2018-03-22T14:00:00Z\",\n\t\t\t\"dayOfWeek\": \"Friday\"\n\t\t}]\n\t}, {\n\t\t\"productLine\": \"Normal\",\n\t\t\"serviceTimeInMins\": 30,\n\t\t\"visitName\": \"visit3({{random1}})\",\n\t\t\"visitDetail\": [{\n\t\t\t\"visitStartTime\": \"2018-03-22T10:30:00Z\",\n\t\t\t\"visitEndTime\": \"2018-03-22T11:00:00Z\",\n\t\t\t\"dayOfWeek\": \"Saturday\"\n\t\t}]\n\t}]\n}]"
+										},
+										"description": ""
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		}
+	]
+}
