@@ -1,2 +1,2 @@
 language: java
-script: clean install exec:java -Dexec.args="'Y' '2' 'cp.chirag.pandit@gmail.com' 'TESTS:ALL' 'Chrome'"
+script: mvn clean install exec:java -Dexec.args="'Y' '2' 'cp.chirag.pandit@gmail.com' 'TESTS:ALL' 'Chrome'"
