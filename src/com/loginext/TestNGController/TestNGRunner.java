@@ -34,7 +34,7 @@ public class TestNGRunner
 
 	boolean parallelMode = true;
 	int iNumberOfParallelBrowsers = 3;
-	String strMailerList = "chirag.p@loginextsolutions.com";
+	String strMailerList = "cp.chirag.pandit@gmail.com";
 
 	//Add parameters to filter tests in Jenkins
 	String strJenkinsParam_TestCaseList = "TESTS:wikipediaTest";//orderUpdateBulk";//driverReportDownload";//driverReportDownload";//addDriverTest";//updateVehicle";//loginextPulicSignUp";//addVehicle";//"TESTS:ALL";
